@@ -1,9 +1,18 @@
 import React from 'react';
 
 import { products, ProductI } from '@app/database';
-import cn from '@utils/classNames';
+import cn from '@utils/classnames';
+import FileFinderProduct from '@app/FileFinderProduct';
 
-const FileFinder = ({ className = '' }: { className?: string }) => {
+const FileFinder = ({
+  className = '',
+  files,
+  dirHandle,
+}: {
+  className?: string;
+  files: Array<FileSystemFileHandle>;
+  dirHandle: FileSystemDirectoryHandle;
+}) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
 
   const results = React.useMemo<Array<ProductI>>(
@@ -22,14 +31,15 @@ const FileFinder = ({ className = '' }: { className?: string }) => {
         id="searchTerm"
         type="text"
       />
-      <ul className="file-finder__list">
+      <div className="file-finder__list">
         {results.map((product) => (
-          <li>
-            {product.images.length !== 0 && <img src={product.images[0].url} />}
-            <p>{product.name}</p>
-          </li>
+          <FileFinderProduct
+            className="file-finder__list-item"
+            product={product}
+            dirHandle={dirHandle}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

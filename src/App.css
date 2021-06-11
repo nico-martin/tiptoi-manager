@@ -1,3 +1,24 @@
 .app {
-    background-color: red;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        height: 4rem;
+        position: relative;
+        z-index: 20;
+    }
+
+    &__main {
+        height: calc(100vh - 4rem);
+        display: flex;
+    }
+
+    &__pen {
+        margin: 0 var(--space-grid);
+    }
+
+    &__filefinder {
+        margin: 0 var(--space-grid);
+    }
 }

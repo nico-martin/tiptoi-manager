@@ -1,0 +1,14 @@
+.directory-picker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 0 var(--space-grid);
+
+    &__error {
+        margin-bottom: var(--space-grid);
+    }
+}

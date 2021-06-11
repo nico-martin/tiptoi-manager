@@ -1,28 +1,38 @@
-import { h, render, Fragment } from 'preact';
-import { useEffect, useState, useMemo } from 'preact/hooks';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import DirectoryPicker from '@app/DirectoryPicker';
 import FileFinder from '@app/FileFinder';
 import Pen from '@app/Pen';
+import Header from '@app/Header';
+
 import './App.css';
 
 const AppElement = document.querySelector(`#app`);
 
 const App = () => {
-  const [dirHandle, setDirHandle] = useState<any>(null);
-  const [files, setFiles] = useState<Array<any>>([]);
+  const [dirHandle, setDirHandle] =
+    React.useState<FileSystemDirectoryHandle>(null);
+  const [files, setFiles] = React.useState<Array<FileSystemFileHandle>>([]);
 
   return (
-    <div className="app">
-      {!dirHandle ? (
-        <DirectoryPicker setDirHandle={setDirHandle} />
-      ) : (
-        <div>
-          qwertz
-          <Pen />
-          <FileFinder />
-        </div>
-      )}
-    </div>
+    <article className="app">
+      <Header className="app__header" />
+      <main className="app__main">
+        {!dirHandle ? (
+          <DirectoryPicker setDirHandle={setDirHandle} setFiles={setFiles} />
+        ) : (
+          <React.Fragment>
+            <Pen className="app__pen" files={files} />
+            <FileFinder
+              className="app__filefinder"
+              files={files}
+              dirHandle={dirHandle}
+            />
+          </React.Fragment>
+        )}
+      </main>
+    </article>
   );
 
   /*
@@ -68,5 +78,5 @@ const App = () => {
 };
 
 if (AppElement) {
-  render(<App />, AppElement);
+  ReactDOM.render(<App />, AppElement);
 }

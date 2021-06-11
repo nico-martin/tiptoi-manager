@@ -9,10 +9,14 @@
   "author": "Nico Martin",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -cw"
+    "dev": "npm run serve:dev & npm run build:dev",
+    "prod": "npm run build:prod",
+    "build:dev": "webpack -d --watch",
+    "build:prod": "webpack -p",
+    "serve:dev": "webpack-dev-server --open"
   },
   "dependencies": {
+    "@types/wicg-file-system-access": "^2020.9.1",
     "preact": "^10.5.13"
   },
   "devDependencies": {
@@ -54,6 +58,26 @@
     "webpack-pwa-manifest": "^4.1.1",
     "workbox-webpack-plugin": "^5.0.0"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragma": "h",
+          "pragmaFrag": "Fragment"
+        }
+      ],
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "browserslist": [
+    "> 1%",
+    "IE 11"
+  ],
   "prettier": {
     "singleQuote": true,
     "trailingComma": "es5",
