@@ -1,24 +1,36 @@
 {
-  "compilerOptions": {"sourceMap": true,
+  "compilerOptions": {
+    "sourceMap": true,
     "module": "commonjs",
     "target": "es5",
-    "lib": ["esnext", "dom"],
     "jsx": "react",
-    "jsxFactory": "h",
+    "jsxFactory": "React.createElement",
     "esModuleInterop": true,
     "baseUrl": "./",
-    "resolveJsonModule": false,
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "react": [
-        "node_modules/preact/compat"
+      "@app/*": [
+        "src/app/*"
       ],
-      "react-dom": [
-        "node_modules/preact/compat"
-      ]
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@theme": [
+        "src/theme/index.ts"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
+      "@types/*": [
+        "src/@types/*"
+      ],
+      "react": ["node_modules/preact/compat"],
+      "react-dom": ["node_modules/preact/compat"]
     },
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/@types"
     ]
   },
   "include": [

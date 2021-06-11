@@ -1,0 +1,71 @@
+:root {
+  --fs: 1rem;
+  --fs-small: 0.9rem;
+  --fs-xsmall: 0.7rem;
+  --fs-big: 1.2rem;
+  --font: Affogato, sans-serif;
+  --font-editor-wysiwyg: Segoe UI, system-ui, -apple-system, sans-serif;
+  --font-editor-md: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  //font-size: 2vmin;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 100%;
+  line-height: 1.4;
+  color: var(--c-p);
+}
+
+b {
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font);
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+/* button reset */
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+a {
+  color: var(--c-primary);
+}
+
+.fs--small {
+  font-size: var(--fs-small);
+}
+
+.fs--xsmall {
+  font-size: var(--fs-xsmall);
+}
+
+.code,
+code {
+  font-family: var(--font-mono);
+}
+
+button {
+  color: var(--c-p);
+}
