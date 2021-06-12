@@ -11,3 +11,4 @@ export { default as OutsideClickHandler } from './Misc/OutsideClickHandler';
 export { default as FieldSelect } from './Form/FieldSelect';
 export { default as FieldInput } from './Form/FieldInput';
 export { default as FieldRadio } from './Form/FieldRadio';
+export { default as FieldCheckbox } from './Form/FieldCheckbox';

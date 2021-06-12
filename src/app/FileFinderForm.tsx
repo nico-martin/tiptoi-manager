@@ -2,6 +2,7 @@ import React from 'react';
 import { productCategories } from '@app/database';
 
 import './FileFinderForm.css';
+import { FieldCheckbox } from '@theme';
 
 const FileFinderForm = ({
   setSearchTerm,
@@ -22,13 +23,16 @@ const FileFinderForm = ({
         className="file-finder-form__searchterm"
         placeholder="search.."
       />
+      <h3 className="file-finder-form__titlecat">Categories</h3>
       <ul className="file-finder-form__categories">
         <li className="file-finder-form__category">
           <label className="file-finder-form__category-label">
-            <input
-              type="checkbox"
+            <FieldCheckbox
               name="all"
-              onClick={(e) =>
+              id="all"
+              value="all"
+              label="Alle"
+              onChange={(e) =>
                 setCheckedCategories(
                   (e.target as HTMLInputElement).checked
                     ? productCategories
@@ -37,28 +41,26 @@ const FileFinderForm = ({
               }
               checked={checkedCategories.length === productCategories.length}
               className="file-finder-form__category-input"
-            />{' '}
-            Alle
+            />
           </label>
         </li>
         {productCategories.map((cat) => (
           <li className="file-finder-form__category">
-            <label className="file-finder-form__category-label">
-              <input
-                type="checkbox"
-                name={cat}
-                onClick={(e) =>
-                  setCheckedCategories(
-                    (e.target as HTMLInputElement).checked
-                      ? [...checkedCategories, cat]
-                      : checkedCategories.filter((c) => c !== cat)
-                  )
-                }
-                checked={checkedCategories.includes(cat)}
-                className="file-finder-form__category-input"
-              />{' '}
-              {cat}
-            </label>
+            <FieldCheckbox
+              name={cat}
+              id={cat}
+              value={cat}
+              label={cat}
+              onChange={(e) =>
+                setCheckedCategories(
+                  (e.target as HTMLInputElement).checked
+                    ? [...checkedCategories, cat]
+                    : checkedCategories.filter((c) => c !== cat)
+                )
+              }
+              checked={checkedCategories.includes(cat)}
+              className="file-finder-form__category-input"
+            />
           </li>
         ))}
       </ul>

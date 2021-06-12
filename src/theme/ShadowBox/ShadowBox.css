@@ -102,7 +102,7 @@
   }
 
   &__content {
-    padding: var(--space) var(--space-l) calc(var(--space-l) * 2) var(--space-l);
+    padding: 0 var(--space-l) calc(var(--space-l) * 2) var(--space-l);
   }
 
   &__loader {

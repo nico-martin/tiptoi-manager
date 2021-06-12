@@ -10,12 +10,14 @@ export default ({
   close,
   size = 'large',
   className = '',
+  preventClose,
 }: {
   title?: string;
   children?: React.JSX.Element | React.JSX.Element[] | string;
   close: Function;
   size?: 'large' | 'small';
   className?: string;
+  preventClose?: boolean;
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
   const [shadow, setShadow] = React.useState<boolean>(false);
@@ -28,6 +30,9 @@ export default ({
   }, []);
 
   const onClose = () => {
+    if (preventClose) {
+      return;
+    }
     setShow(false);
     window.setTimeout(() => {
       close();
@@ -47,7 +52,9 @@ export default ({
           })}
         >
           {title !== null && <h1 className="shadowbox__title">{title}</h1>}{' '}
-          <CloseButton className="shadowbox__close" onClick={onClose} />
+          {!preventClose && (
+            <CloseButton className="shadowbox__close" onClick={onClose} />
+          )}
         </header>
         <div className="shadowbox__content">{children}</div>
       </article>

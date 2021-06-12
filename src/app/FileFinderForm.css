@@ -15,13 +15,20 @@
         }
     }
 
+    &__titlecat {
+        margin-top: var(--space-grid-half);
+    }
+
     &__categories {
+        margin-top: var(--space-grid-half);
         list-style: none;
         display: block;
     }
 
     &__category {
         display: inline-block;
-        margin-right: 1rem;
+        margin-right: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
     }
 }

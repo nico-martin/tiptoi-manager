@@ -1,0 +1,20 @@
+.file-finder-product {
+    display: flex;
+    flex-direction: column;
+
+    &__img {
+        object-fit: contain;
+        aspect-ratio: 5/4;
+        width: 100%;
+        border: 1px solid var(--c-border-light);
+    }
+
+    &__title {
+        margin: var(--space-s) 0;
+    }
+
+    &__download {
+        margin-top: auto;
+        align-self: center;
+    }
+}

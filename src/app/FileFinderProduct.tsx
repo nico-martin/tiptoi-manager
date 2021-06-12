@@ -5,6 +5,9 @@ import cn from '@utils/classnames';
 import { ProductI } from '@app/database';
 import { Button } from '@theme';
 import { writeFile } from '@utils/fileSystem';
+import FileFinderProductInstallModal from '@app/FileFinderProductInstallModal';
+
+import './FileFinderProduct.css';
 
 const FileFinderProduct = ({
   className = '',
@@ -15,8 +18,7 @@ const FileFinderProduct = ({
   product: ProductI;
   dirHandle: FileSystemDirectoryHandle;
 }) => {
-  const [pending, setPending] = React.useState<boolean>(false);
-  const [downloaded, setDownloaded] = React.useState<string>('');
+  const [showModal, setShowModal] = React.useState<boolean>(false);
 
   const gameFile = React.useMemo(
     () => (product.gameFiles.length >= 1 ? product.gameFiles[0] : null),
@@ -24,52 +26,31 @@ const FileFinderProduct = ({
   );
 
   return (
-    <div className={cn(className)}>
-      {product.images.length !== 0 && <img src={product.images[0].url} />}
-      <p>{product.name}</p>
+    <div className={cn(className, 'file-finder-product')}>
+      {product.images.length !== 0 && (
+        <img
+          className="file-finder-product__img"
+          src={product.images[product.images.length - 1].url}
+          alt={product.name}
+        />
+      )}
+      {showModal && (
+        <FileFinderProductInstallModal
+          onClose={() => setShowModal(false)}
+          product={product}
+          dirHandle={dirHandle}
+        />
+      )}
+      <p className="file-finder-product__title">{product.name}</p>
       {gameFile && (
-        <React.Fragment>
-          <p>{gameFile.fileName}</p>
-          {downloaded ? (
-            <Button
-              onClick={() => {
-                writeFile(dirHandle, gameFile.fileName, downloaded);
-              }}
-              disabled={pending}
-              loading={pending}
-            >
-              install
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                setPending(true);
-                axios
-                  .get(
-                    `https://cors.nico.dev/?url=${encodeURI(
-                      gameFile.url
-                    )}&mode=native`,
-                    {
-                      onDownloadProgress: (p) => console.log(p),
-                    }
-                  )
-                  .then((str) => {
-                    setDownloaded(str.data);
-                    setPending(false);
-                  })
-                  .catch((e) => {
-                    console.error(e);
-                    alert('File could not be downloaded');
-                  })
-                  .finally(() => setPending(false));
-              }}
-              disabled={pending}
-              loading={pending}
-            >
-              download
-            </Button>
-          )}
-        </React.Fragment>
+        <Button
+          icon="mdi/download"
+          size="small"
+          onClick={() => setShowModal(true)}
+          className="file-finder-product__download"
+        >
+          Download
+        </Button>
       )}
     </div>
   );

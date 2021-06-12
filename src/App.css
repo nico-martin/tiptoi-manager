@@ -4,13 +4,13 @@
     flex-direction: column;
 
     &__header {
-        height: 4rem;
+        height: 6rem;
         position: relative;
         z-index: 20;
     }
 
     &__main {
-        height: calc(100vh - 4rem);
+        height: calc(100vh - 6rem);
         display: flex;
     }
 

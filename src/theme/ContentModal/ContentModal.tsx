@@ -12,6 +12,7 @@ const ContentModal = ({
   className = '',
   loading = false,
   full = true,
+  preventClose = false,
 }: {
   title: string;
   children?: React.JSX.Element | React.JSX.Element[] | string;
@@ -19,6 +20,7 @@ const ContentModal = ({
   className?: string;
   loading?: boolean;
   full?: boolean;
+  preventClose?: boolean;
 }) => (
   <React.Fragment>
     <ShadowBox
@@ -26,6 +28,7 @@ const ContentModal = ({
       close={onClose}
       className={cn(className, 'content-modal')}
       size={full ? 'large' : 'small'}
+      preventClose={preventClose}
     >
       <div className="content-modal__content">
         {loading ? <Loader className="content-modal__loader" /> : children}

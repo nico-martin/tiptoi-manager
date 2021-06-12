@@ -5,6 +5,8 @@ import cn from '@utils/classnames';
 import FileFinderProduct from '@app/FileFinderProduct';
 import FileFinderForm from '@app/FileFinderForm';
 
+import './FileFinder.css';
+
 const FileFinder = ({
   className = '',
   files,
@@ -33,11 +35,15 @@ const FileFinder = ({
 
   return (
     <div className={cn(className, 'file-finder')}>
+      <h2 className="file-finder__title">Searchfilter</h2>
       <FileFinderForm
         setSearchTerm={setSearchTerm}
         checkedCategories={checkedCategories}
         setCheckedCategories={setCheckedCategories}
       />
+      <h2 className="file-finder__title file-finder__title--products">
+        Products
+      </h2>
       <div className="file-finder__list">
         {results.map((product) => (
           <FileFinderProduct
