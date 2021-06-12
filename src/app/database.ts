@@ -31,3 +31,10 @@ export interface ProductI {
 }
 
 export const products: Array<ProductI> = productsDB;
+
+export const productCategories: Array<string> = products
+  .reduce((acc, product) => [...acc, ...product.categories], [])
+  .reduce(
+    (acc, product) => (acc.includes(product) ? acc : [...acc, product]),
+    []
+  );

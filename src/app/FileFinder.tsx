@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { products, ProductI } from '@app/database';
+import { products, productCategories, ProductI } from '@app/database';
 import cn from '@utils/classnames';
 import FileFinderProduct from '@app/FileFinderProduct';
+import FileFinderForm from '@app/FileFinderForm';
 
 const FileFinder = ({
   className = '',
@@ -14,22 +15,28 @@ const FileFinder = ({
   dirHandle: FileSystemDirectoryHandle;
 }) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
+  const [checkedCategories, setCheckedCategories] =
+    React.useState<Array<string>>(productCategories);
 
   const results = React.useMemo<Array<ProductI>>(
     () =>
-      products.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ),
-    [searchTerm]
+      products
+        .filter(
+          (product) =>
+            product.categories.some((item) =>
+              checkedCategories.includes(item)
+            ) && product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .slice(0, 5),
+    [searchTerm, checkedCategories]
   );
 
   return (
     <div className={cn(className, 'file-finder')}>
-      <input
-        onKeyUp={(e) => setSearchTerm((e.target as HTMLInputElement).value)}
-        name="searchTerm"
-        id="searchTerm"
-        type="text"
+      <FileFinderForm
+        setSearchTerm={setSearchTerm}
+        checkedCategories={checkedCategories}
+        setCheckedCategories={setCheckedCategories}
       />
       <div className="file-finder__list">
         {results.map((product) => (

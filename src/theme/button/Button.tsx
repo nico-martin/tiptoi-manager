@@ -10,31 +10,25 @@ const Button = ({
   className = '',
   onClick = () => {},
   layout = 'solid',
-  round = false,
   icon = '',
   iconRight = false,
-  iconCircle = false,
   size = 'medium',
   loading = false,
   disabled = false,
-  color = 'black',
-  zeroPadding = false,
+  color = 'orange',
   fontWeight = 'bold',
   ...props
 }: {
   children?: React.JSX.Element | React.JSX.Element[] | string;
   className?: string;
   onClick?: Function;
-  layout?: 'solid' | 'ghost' | 'empty';
-  round?: boolean;
+  layout?: 'solid';
   icon?: string;
   iconRight?: boolean;
-  iconCircle?: boolean;
   size?: 'medium' | 'small' | 'large';
   loading?: boolean;
   disabled?: boolean;
-  color?: 'black' | 'primary';
-  zeroPadding?: boolean;
+  color?: 'black' | 'orange';
   fontWeight?: 'normal' | 'bold';
   [key: string]: any;
 }) => {
@@ -50,11 +44,10 @@ const Button = ({
         `button--color-${color}`,
         `button--fontWeight-${fontWeight}`,
         {
-          'button--round': round,
           'button--loading': loading,
           'button--disabled': disabled,
-          'button--zeropadding': zeroPadding,
           'button--notext': children === '',
+          [`button--has-icon-${iconRight ? 'right' : 'left'}`]: icon !== '',
         }
       )}
       onClick={() => onClick()}
@@ -62,19 +55,11 @@ const Button = ({
       <div className="button__bkg" />
       <Loader className="button__loader" />
       {icon !== '' && !iconRight && (
-        <Icon
-          className="button__icon button__icon--left"
-          icon={icon}
-          circle={iconCircle}
-        />
+        <Icon className="button__icon button__icon--left" icon={icon} />
       )}
       <span className="button__content">{children}</span>
       {icon !== '' && iconRight && (
-        <Icon
-          className="button__icon button__icon--right"
-          icon={icon}
-          circle={iconCircle}
-        />
+        <Icon className="button__icon button__icon--right" icon={icon} />
       )}
     </button>
   );

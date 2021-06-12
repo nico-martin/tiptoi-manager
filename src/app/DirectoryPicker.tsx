@@ -59,6 +59,13 @@ const DirectoryPicker = ({
       >
         select pen
       </Button>
+      <div className="directory-picker__description">
+        <p>
+          Please connect your Tiptoi pen to your computer using the supplied USB
+          cable first.
+        </p>
+        <p>Then you can select the pen using the button above.</p>
+      </div>
     </div>
   );
 };

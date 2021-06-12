@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@types/wicg-file-system-access": "^2020.9.1",
+    "axios": "^0.21.1",
     "preact": "^10.5.13"
   },
   "devDependencies": {

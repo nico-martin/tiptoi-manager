@@ -6,7 +6,7 @@
   --c-bkg-extra-dark: #d9d9d9;
   --c-bkg-light: #fff;
   --c-bkg-close-button-hover: #e2e2e2;
-  --c-shadow: rgba(60, 64, 67, 0.1);
+  --c-shadow: rgba(47, 50, 52, 0.1);
   --shadow-panel: 0 0 4px 0 rgba(60, 64, 67, 0.3);
   --shadow-paper: 0 0 10px 0 rgba(60, 64, 67, 0.3);
   --c-border: rgb(205, 205, 205);
@@ -17,6 +17,8 @@
   --c-feedback: #5480cb;
   --c-feedback-error: #722121;
   --c-feedback-success: #206920;
+  --c-orange: #ff8e00;
+  --c-blue: #195dae;
 }
 
 @media (prefers-color-scheme: dark) {

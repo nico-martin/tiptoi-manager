@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import cn from '@utils/classnames';
 import { ProductI } from '@app/database';
 import { Button } from '@theme';
@@ -30,7 +32,6 @@ const FileFinderProduct = ({
           <p>{gameFile.fileName}</p>
           {downloaded ? (
             <Button
-              layout="ghost"
               onClick={() => {
                 writeFile(dirHandle, gameFile.fileName, downloaded);
               }}
@@ -41,15 +42,26 @@ const FileFinderProduct = ({
             </Button>
           ) : (
             <Button
-              layout="ghost"
               onClick={() => {
                 setPending(true);
-                fetch(gameFile.url).then((res) =>
-                  res.text().then((fileString) => {
+                axios
+                  .get(
+                    `https://cors.nico.dev/?url=${encodeURI(
+                      gameFile.url
+                    )}&mode=native`,
+                    {
+                      onDownloadProgress: (p) => console.log(p),
+                    }
+                  )
+                  .then((str) => {
+                    setDownloaded(str.data);
                     setPending(false);
-                    setDownloaded(fileString);
                   })
-                );
+                  .catch((e) => {
+                    console.error(e);
+                    alert('File could not be downloaded');
+                  })
+                  .finally(() => setPending(false));
               }}
               disabled={pending}
               loading={pending}
