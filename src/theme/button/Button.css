@@ -87,6 +87,14 @@
     &--disabled {
         pointer-events: none;
         opacity: 0.5;
+
+        .button__bkg {
+            background-color: var(--c-p);
+        }
+
+        .button__icon {
+            color: var(--c-p);
+        }
     }
 
     transition: all 200ms ease-in-out;
