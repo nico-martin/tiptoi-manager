@@ -77,13 +77,13 @@ module.exports = (env, argv) => {
         minify: dev
           ? false
           : {
-            collapseWhitespace: true,
-            removeComments: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true,
-          },
+              collapseWhitespace: true,
+              removeComments: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+            },
       }),
       new WebpackPwaManifest({
         name: app.title,
@@ -103,23 +103,15 @@ module.exports = (env, argv) => {
             purpose: 'maskable any',
           },
         ],
-        file_handlers: [
-          {
-            action: '/',
-            accept: {
-              'text/markdown': ['.md'],
-            },
-          },
-        ],
       }),
       ...(!dev
         ? [
-          new workboxPlugin.InjectManifest({
-            swSrc: './src/service-worker.js',
-            include: [/\.html$/, /\.js$/, /\.css$/],
-            maximumFileSizeToCacheInBytes: 5000000,
-          }),
-        ]
+            new workboxPlugin.InjectManifest({
+              swSrc: './src/service-worker.js',
+              include: [/\.html$/, /\.js$/, /\.css$/],
+              maximumFileSizeToCacheInBytes: 5000000,
+            }),
+          ]
         : []),
       new DefinePlugin({
         IS_DEV: JSON.stringify(dev),
