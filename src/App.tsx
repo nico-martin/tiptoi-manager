@@ -5,30 +5,24 @@ import DirectoryPicker from '@app/DirectoryPicker';
 import FileFinder from '@app/FileFinder';
 import Pen from '@app/Pen';
 import Header from '@app/Header';
+import { FilesContextProvider, useDirHandle } from '@app/FilesContext';
 
 import './App.css';
 
 const AppElement = document.querySelector(`#app`);
 
 const App = () => {
-  const [dirHandle, setDirHandle] =
-    React.useState<FileSystemDirectoryHandle>(null);
-  const [files, setFiles] = React.useState<Array<FileSystemFileHandle>>([]);
-
+  const [dirHandle] = useDirHandle();
   return (
     <article className="app">
       <Header className="app__header" />
       <main className="app__main">
         {!dirHandle ? (
-          <DirectoryPicker setDirHandle={setDirHandle} setFiles={setFiles} />
+          <DirectoryPicker />
         ) : (
           <React.Fragment>
-            <Pen className="app__pen" files={files} />
-            <FileFinder
-              className="app__filefinder"
-              files={files}
-              dirHandle={dirHandle}
-            />
+            <Pen className="app__pen" />
+            <FileFinder className="app__filefinder" />
           </React.Fragment>
         )}
       </main>
@@ -78,5 +72,10 @@ const App = () => {
 };
 
 if (AppElement) {
-  ReactDOM.render(<App />, AppElement);
+  ReactDOM.render(
+    <FilesContextProvider>
+      <App />
+    </FilesContextProvider>,
+    AppElement
+  );
 }

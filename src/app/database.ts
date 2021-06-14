@@ -38,3 +38,14 @@ export const productCategories: Array<string> = products
     (acc, product) => (acc.includes(product) ? acc : [...acc, product]),
     []
   );
+
+export const gmeFilesIndices: Record<string, number> = products.reduce(
+  (acc, product, index) => ({
+    ...acc,
+    ...product.gameFiles.reduce(
+      (acc, file) => ({ ...acc, [file.url.split('/').pop()]: index }),
+      {}
+    ),
+  }),
+  {}
+);

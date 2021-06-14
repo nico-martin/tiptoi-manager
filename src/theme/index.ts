@@ -1,4 +1,5 @@
 export { default as Button } from './Button/Button';
+export { default as ButtonGroup } from './Button/ButtonGroup';
 export { default as CloseButton } from './CloseButton/CloseButton';
 export { default as ShadowBox } from './ShadowBox/ShadowBox';
 export { default as PortalBox } from './ShadowBox/PortalBox';

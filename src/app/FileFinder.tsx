@@ -7,29 +7,19 @@ import FileFinderForm from '@app/FileFinderForm';
 
 import './FileFinder.css';
 
-const FileFinder = ({
-  className = '',
-  files,
-  dirHandle,
-}: {
-  className?: string;
-  files: Array<FileSystemFileHandle>;
-  dirHandle: FileSystemDirectoryHandle;
-}) => {
+const FileFinder = ({ className = '' }: { className?: string }) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
-  const [checkedCategories, setCheckedCategories] =
-    React.useState<Array<string>>(productCategories);
+  const [checkedCategories, setCheckedCategories] = React.useState<
+    Array<string>
+  >(productCategories);
 
   const results = React.useMemo<Array<ProductI>>(
     () =>
-      products
-        .filter(
-          (product) =>
-            product.categories.some((item) =>
-              checkedCategories.includes(item)
-            ) && product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .slice(0, 5),
+      products.filter(
+        product =>
+          product.categories.some(item => checkedCategories.includes(item)) &&
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
     [searchTerm, checkedCategories]
   );
 
@@ -45,11 +35,10 @@ const FileFinder = ({
         Products
       </h2>
       <div className="file-finder__list">
-        {results.map((product) => (
+        {results.map(product => (
           <FileFinderProduct
             className="file-finder__list-item"
             product={product}
-            dirHandle={dirHandle}
           />
         ))}
       </div>

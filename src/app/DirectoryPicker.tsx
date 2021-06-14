@@ -4,14 +4,11 @@ import { Button, Notification } from '@theme';
 import { getDirectoryEntries, getDirectoryHandle } from '@utils/fileSystem';
 
 import './DirectoryPicker.css';
+import { useDirHandle, usePenFiles } from '@app/FilesContext';
 
-const DirectoryPicker = ({
-  setDirHandle,
-  setFiles,
-}: {
-  setDirHandle: (handle: FileSystemDirectoryHandle) => void;
-  setFiles: (files: Array<FileSystemFileHandle>) => void;
-}) => {
+const DirectoryPicker = () => {
+  const [dirHandle, setDirHandle] = useDirHandle();
+
   const [pendig, setPending] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>('');
 
@@ -39,12 +36,6 @@ const DirectoryPicker = ({
                   if (!icoFile) {
                     setError('The selected directory is not a Tiptoi pen.');
                   } else {
-                    const gmeFiles = entries.filter(
-                      (entry) =>
-                        entry.kind === 'file' &&
-                        entry.name.split('.').pop() === 'gme'
-                    ) as Array<FileSystemFileHandle>;
-                    setFiles(gmeFiles);
                     setDirHandle(handle);
                   }
                 }

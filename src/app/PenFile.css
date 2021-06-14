@@ -1,0 +1,46 @@
+.pen-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+        .pen-file__delete {
+            opacity: 1;
+        }
+    }
+
+    &__delete {
+        opacity: 0;
+        height: 1em;
+        width: 1em;
+        position: relative;
+        text-indent: -9999px;
+        background-color: var(--c-feedback-error);
+        transform: scale(1.4);
+        border-radius: 50%;
+        transition: opacity var(--transition-speed) var(--transition-function);
+        cursor: pointer;
+
+        &:after, &:before {
+            content: '';
+            width: 0.1em;
+            background-color: #fff;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%) rotate(45deg) scale(0.6);
+        }
+
+        &:before {
+            transform: translateY(-50%) translateX(-50%) rotate(-45deg) scale(0.6);
+        }
+    }
+
+    &__delete-desc {
+        margin-bottom: var(--space-grid);
+        p+p {
+            margin-top: 0.5rem;
+        }
+    }
+}

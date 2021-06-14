@@ -1,22 +1,18 @@
 import React from 'react';
-import axios from 'axios';
 
 import cn from '@utils/classnames';
 import { ProductI } from '@app/database';
 import { Button } from '@theme';
-import { writeFile } from '@utils/fileSystem';
-import FileFinderProductInstallModal from '@app/FileFinderProductInstallModal';
+import FileFinderInstall from '@app/FileFinderInstall';
 
 import './FileFinderProduct.css';
 
 const FileFinderProduct = ({
   className = '',
   product,
-  dirHandle,
 }: {
   className?: string;
   product: ProductI;
-  dirHandle: FileSystemDirectoryHandle;
 }) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
 
@@ -32,13 +28,13 @@ const FileFinderProduct = ({
           className="file-finder-product__img"
           src={product.images[product.images.length - 1].url}
           alt={product.name}
+          loading="lazy"
         />
       )}
       {showModal && (
-        <FileFinderProductInstallModal
+        <FileFinderInstall
           onClose={() => setShowModal(false)}
           product={product}
-          dirHandle={dirHandle}
         />
       )}
       <p className="file-finder-product__title">{product.name}</p>

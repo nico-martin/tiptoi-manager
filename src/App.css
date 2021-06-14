@@ -16,9 +16,39 @@
 
     &__pen {
         margin: 0 var(--space-grid);
+        flex: 1 0 30vw;
+        height: 100%;
     }
 
     &__filefinder {
         margin: 0 var(--space-grid);
+        height: 100%;
+    }
+
+    &__pen, &__filefinder {
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            transition: background-color 200ms;
+            will-change: background-color;
+            border-radius: 5px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &:hover {
+            &::-webkit-scrollbar-thumb {
+                background-color: var(--c-border-dark);
+            }
+        }
     }
 }

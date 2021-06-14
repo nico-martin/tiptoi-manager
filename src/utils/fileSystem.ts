@@ -23,7 +23,7 @@ export const getDirectoryEntries = (
     }
   });
 
-export const writeFile = async (
+export const writeFile = (
   dirHandle: FileSystemDirectoryHandle,
   name: string,
   content: string
@@ -37,6 +37,19 @@ export const writeFile = async (
       await writable.write(content);
       await writable.close();
       resolve(newFileHandle);
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+export const deleteFile = (
+  dirHandle: FileSystemDirectoryHandle,
+  name: string
+) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      await dirHandle.removeEntry(name);
+      resolve(name);
     } catch (e) {
       reject(e);
     }
