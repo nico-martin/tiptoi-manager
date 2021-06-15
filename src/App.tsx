@@ -6,6 +6,7 @@ import FileFinder from '@app/FileFinder';
 import Pen from '@app/Pen';
 import Header from '@app/Header';
 import { FilesContextProvider, useDirHandle } from '@app/FilesContext';
+import { Notification } from '@theme';
 
 import './App.css';
 
@@ -17,7 +18,13 @@ const App = () => {
     <article className="app">
       <Header className="app__header" />
       <main className="app__main">
-        {!dirHandle ? (
+        {!('showDirectoryPicker' in window) ? (
+          <Notification className="app__error" type="error">
+            This app uses the "file access API", an experimental browser API
+            that is currently onyl supported in the desktop versions of Chrome,
+            Edge and Opera
+          </Notification>
+        ) : !dirHandle ? (
           <DirectoryPicker />
         ) : (
           <React.Fragment>
