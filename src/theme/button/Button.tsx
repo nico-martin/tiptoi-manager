@@ -1,9 +1,7 @@
 import React from 'react';
-
 import cn from '@utils/classnames';
 import { Loader, Icon } from '../index';
-
-import './Button.css';
+import styles from './Button.css';
 
 const Button = ({
   children = '',
@@ -31,38 +29,35 @@ const Button = ({
   color?: 'black' | 'orange';
   fontWeight?: 'normal' | 'bold';
   [key: string]: any;
-}) => {
-  return (
-    <button
-      {...props}
-      disabled={disabled}
-      className={cn(
-        className,
-        'button',
-        `button--type-${layout}`,
-        `button--size-${size}`,
-        `button--color-${color}`,
-        `button--fontWeight-${fontWeight}`,
-        {
-          'button--loading': loading,
-          'button--disabled': disabled,
-          'button--notext': children === '',
-          [`button--has-icon-${iconRight ? 'right' : 'left'}`]: icon !== '',
-        }
-      )}
-      onClick={() => onClick()}
-    >
-      <div className="button__bkg" />
-      <Loader className="button__loader" />
-      {icon !== '' && !iconRight && (
-        <Icon className="button__icon button__icon--left" icon={icon} />
-      )}
-      <span className="button__content">{children}</span>
-      {icon !== '' && iconRight && (
-        <Icon className="button__icon button__icon--right" icon={icon} />
-      )}
-    </button>
-  );
-};
+}) => (
+  <button
+    {...props}
+    disabled={disabled}
+    className={cn(
+      className,
+      styles.root,
+      styles[`size-${size}`],
+      styles[`color-${color}`],
+      styles[`fontWeight-${fontWeight}`],
+      {
+        [styles.isLoading]: loading,
+        [styles.isDisabled]: disabled,
+        [styles.hasNnotext]: children === '',
+        [styles[`hasIcon-${iconRight ? 'right' : 'left'}`]]: icon !== '',
+      }
+    )}
+    onClick={() => onClick()}
+  >
+    <div className={styles.bkg} />
+    <Loader className={styles.loader} />
+    {icon !== '' && !iconRight && (
+      <Icon className={cn(styles.icon, styles[`icon-left`])} icon={icon} />
+    )}
+    <span className={styles.content}>{children}</span>
+    {icon !== '' && iconRight && (
+      <Icon className={cn(styles.icon, styles[`icon-right`])} icon={icon} />
+    )}
+  </button>
+);
 
 export default Button;

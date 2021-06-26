@@ -1,7 +1,6 @@
 import React from 'react';
 import cn from '@utils/classnames';
-
-import './Notification.css';
+import styles from './Notification.css';
 
 const Notification = ({
   className = '',
@@ -12,8 +11,8 @@ const Notification = ({
   type?: 'message' | 'success' | 'error';
   children: any;
 }) => (
-  <div className={cn(className, 'notification', `notification--type-${type}`)}>
-    <p className="notification__text">{children}</p>
+  <div className={cn(className, styles.root, styles[`type-${type}`])}>
+    <p className={styles.text}>{children}</p>
   </div>
 );
 

@@ -1,61 +1,62 @@
-.app {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+.root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    &__header {
-        height: 6rem;
-        position: relative;
-        z-index: 20;
+.header {
+  height: 6rem;
+  position: relative;
+  z-index: 20;
+}
+
+.main {
+  height: calc(100vh - 6rem);
+  display: flex;
+}
+
+.error {
+  margin: 0 auto;
+  align-self: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+.pen {
+  margin: 0 var(--space-grid);
+  flex: 1 0 30vw;
+  height: 100%;
+}
+
+.filefinder {
+  margin: 0 var(--space-grid);
+  height: 100%;
+}
+
+.pen,
+.filefinder {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    transition: background-color 200ms;
+    will-change: background-color;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--c-border-dark);
     }
-
-    &__main {
-        height: calc(100vh - 6rem);
-        display: flex;
-    }
-
-    &__error {
-        margin: 0 auto;
-        align-self: center;
-        width: 90%;
-        max-width: 600px;
-    }
-
-    &__pen {
-        margin: 0 var(--space-grid);
-        flex: 1 0 30vw;
-        height: 100%;
-    }
-
-    &__filefinder {
-        margin: 0 var(--space-grid);
-        height: 100%;
-    }
-
-    &__pen, &__filefinder {
-        overflow-y: auto;
-        overflow-x: hidden;
-        scrollbar-width: thin;
-
-        &::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: transparent;
-            transition: background-color 200ms;
-            will-change: background-color;
-            border-radius: 5px;
-        }
-
-        &::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        &:hover {
-            &::-webkit-scrollbar-thumb {
-                background-color: var(--c-border-dark);
-            }
-        }
-    }
+  }
 }

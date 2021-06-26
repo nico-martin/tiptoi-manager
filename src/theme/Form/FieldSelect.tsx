@@ -1,8 +1,6 @@
 import React from 'react';
-
 import cn from '@utils/classnames';
-
-import './FieldSelect.css';
+import styles from './FieldSelect.css';
 
 const FieldSelect = ({
   className = '',
@@ -22,7 +20,7 @@ const FieldSelect = ({
   [key: string]: any;
 }) => (
   <select
-    className={cn(className, 'field-select')}
+    className={cn(className, styles.root)}
     value={value}
     onChange={e => onChange(e)}
     name={name}

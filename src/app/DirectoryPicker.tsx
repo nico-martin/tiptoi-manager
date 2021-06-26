@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { Button, Notification } from '@theme';
 import { getDirectoryEntries, getDirectoryHandle } from '@utils/fileSystem';
-
-import './DirectoryPicker.css';
 import { useDirHandle, usePenFiles } from '@app/FilesContext';
+import styles from './DirectoryPicker.css';
 
 const DirectoryPicker = () => {
   const [dirHandle, setDirHandle] = useDirHandle();
@@ -13,9 +11,9 @@ const DirectoryPicker = () => {
   const [error, setError] = React.useState<string>('');
 
   return (
-    <div className="directory-picker">
+    <div className={styles.root}>
       {error && (
-        <Notification type="error" className="directory-picker__error">
+        <Notification type="error" className={styles.error}>
           {error}
         </Notification>
       )}
@@ -25,11 +23,11 @@ const DirectoryPicker = () => {
         onClick={() => {
           setError('');
           getDirectoryHandle()
-            .then((handle) => {
+            .then(handle => {
               Promise.all([handle, getDirectoryEntries(handle)]).then(
                 ([handle, entries]) => {
                   const icoFile = entries.find(
-                    (entry) =>
+                    entry =>
                       entry.kind === 'file' && entry.name === 'tiptoi.ico'
                   );
 
@@ -41,7 +39,7 @@ const DirectoryPicker = () => {
                 }
               );
             })
-            .catch((e) => {
+            .catch(e => {
               setError('An unexpected error occured');
               console.error(e);
             });
@@ -50,7 +48,7 @@ const DirectoryPicker = () => {
       >
         select pen
       </Button>
-      <div className="directory-picker__description">
+      <div className={styles.description}>
         <p>
           Please connect your Tiptoi pen to your computer using the supplied USB
           cable first.

@@ -25,17 +25,27 @@
       "@types/*": [
         "src/@types/*"
       ],
-      "react": ["node_modules/preact/compat"],
-      "react-dom": ["node_modules/preact/compat"]
+      "react": [
+        "node_modules/preact/compat"
+      ],
+      "react-dom": [
+        "node_modules/preact/compat"
+      ]
     },
     "typeRoots": [
       "node_modules/@types",
       "src/@types"
+    ],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
     ]
   },
   "include": [
     "./**/*.tsx",
     "./**/*.ts",
-    "./**/*.d.ts"
+    "./**/*.d.ts",
+    "./**/*.css"
   ]
 }

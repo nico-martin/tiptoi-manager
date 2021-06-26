@@ -1,6 +1,6 @@
 import React from 'react';
-
-import './CloseButton.css';
+import cn from '@utils/classnames';
+import styles from './CloseButton.css';
 
 const CloseButton = ({
   className = '',
@@ -9,7 +9,7 @@ const CloseButton = ({
   className?: string;
   onClick: Function;
 }) => (
-  <button className={`close-button ${className}`} onClick={() => onClick()}>
+  <button className={cn(styles.root, className)} onClick={() => onClick()}>
     close
   </button>
 );

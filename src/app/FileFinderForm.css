@@ -1,34 +1,40 @@
-.file-finder-form {
-    &__searchterm {
-        width: 100%;
-        padding: 0.5em 1.2em;
-        font-size: 1.5rem;
-        border-radius: 999px;
-        background-color: var(--c-bkg-light);
-        box-shadow: 0.2rem 0.2rem 0.5rem var(--c-shadow) inset;
-        border: 1px solid var(--c-border-light);
-        outline: none;
+.root {
+}
 
-        &:focus {
-            border: 1px solid var(--c-border-dark);
+.searchterm {
+  width: 100%;
+  padding: 0.5em 1.2em;
+  font-size: 1.5rem;
+  border-radius: 999px;
+  background-color: var(--c-bkg-light);
+  box-shadow: 0.2rem 0.2rem 0.5rem var(--c-shadow) inset;
+  border: 1px solid var(--c-border-light);
+  outline: none;
 
-        }
-    }
+  &:focus {
+    border: 1px solid var(--c-border-dark);
+  }
+}
 
-    &__titlecat {
-        margin-top: var(--space-grid-half);
-    }
+.titlecat {
+  margin-top: var(--space-grid-half);
+}
 
-    &__categories {
-        margin-top: var(--space-grid-half);
-        list-style: none;
-        display: block;
-    }
+.categories {
+  margin-top: var(--space-grid-half);
+  list-style: none;
+  display: block;
+}
 
-    &__category {
-        display: inline-block;
-        margin-right: 1.5rem;
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-    }
+.category {
+  display: inline-block;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.categoryLabel {
+}
+
+.categoryInput {
 }

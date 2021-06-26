@@ -1,12 +1,12 @@
-.header {
-    padding: 0 var(--space-grid);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.root {
+  padding: 0 var(--space-grid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-    &__title {
-        font-weight: 999;
-        font-size: 2rem;
-    }
+.title {
+  font-weight: 999;
+  font-size: 2rem;
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Button, ContentModal, ButtonGroup } from '@theme';
-import { ProductI } from '@app/database';
 import { writeFile } from '@utils/fileSystem';
-
-import './FileFinderInstall.css';
 import { useDirHandle, usePenFiles } from '@app/FilesContext';
+import { ProductI } from '@app/database';
+import styles from './FileFinderInstall.css';
 
 const FileFinderInstall = ({
   onClose,
@@ -44,9 +43,9 @@ const FileFinderInstall = ({
   const downloadFile = () => {
     setPending(true);
     fetch(`https://cors.nico.dev/?url=${encodeURI(gameFile.url)}&mode=native`)
-      .then((res) => res.toString())
-      .then((str) => setDownloaded(str))
-      .catch((e) => {
+      .then(res => res.toString())
+      .then(str => setDownloaded(str))
+      .catch(e => {
         console.error(e);
         alert('File could not be downloaded');
       })
@@ -60,7 +59,7 @@ const FileFinderInstall = ({
       full={false}
       preventClose={pending}
     >
-      <div className="file-finder-install">
+      <div className={styles.root}>
         {done ? (
           <p>
             The audio file has been installed successfully. You can now close

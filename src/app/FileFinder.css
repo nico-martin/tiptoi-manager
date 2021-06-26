@@ -1,15 +1,19 @@
-.file-finder {
-    &__title {
-        margin-bottom: var(--space-grid-half);
+.root {
+}
 
-        &--products {
-            margin-top: var(--space-grid);
-        }
-    }
+.title {
+  margin-bottom: var(--space-grid-half);
+}
 
-    &__list {
-        display: grid;
-        grid: auto / repeat(4, 1fr);
-        grid-gap: var(--space-grid);
-    }
+.titleProducts {
+  margin-top: var(--space-grid);
+}
+
+.list {
+  display: grid;
+  grid: auto / repeat(4, 1fr);
+  grid-gap: var(--space-grid);
+}
+
+.listItem {
 }

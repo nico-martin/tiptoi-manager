@@ -1,19 +1,19 @@
-.button-group {
-    display: flex;
+.root {
+  display: flex;
 
-    & > * + * {
-        margin-right: 0.5rem;
-    }
+  & > * + * {
+    margin-right: 0.5rem;
+  }
+}
 
-    &--align-right {
-        justify-content: flex-end;
-    }
+.align-right {
+  justify-content: flex-end;
+}
 
-    &--align-left {
-        justify-content: flex-start;
-    }
+.align-left {
+  justify-content: flex-start;
+}
 
-    &--align-center {
-        justify-content: center;
-    }
+.align-center {
+  justify-content: center;
 }

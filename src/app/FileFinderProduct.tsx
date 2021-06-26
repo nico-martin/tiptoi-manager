@@ -1,12 +1,10 @@
 import React from 'react';
-
-import cn from '@utils/classnames';
-import { ProductI } from '@app/database';
 import { Button } from '@theme';
+import cn from '@utils/classnames';
 import FileFinderInstall from '@app/FileFinderInstall';
-
-import './FileFinderProduct.css';
 import { usePenFiles } from '@app/FilesContext';
+import { ProductI } from '@app/database';
+import styles from './FileFinderProduct.css';
 
 const FileFinderProduct = ({
   className = '',
@@ -37,10 +35,10 @@ const FileFinderProduct = ({
   }, [gameFile, files]);
 
   return (
-    <div className={cn(className, 'file-finder-product')}>
+    <div className={cn(className, styles.root)}>
       {product.images.length !== 0 && (
         <img
-          className="file-finder-product__img"
+          className={styles.img}
           src={product.images[product.images.length - 1].url}
           alt={product.name}
           loading="lazy"
@@ -52,13 +50,13 @@ const FileFinderProduct = ({
           product={product}
         />
       )}
-      <p className="file-finder-product__title">{product.name}</p>
+      <p className={styles.title}>{product.name}</p>
       {gameFile && (
         <Button
           icon="mdi/download"
           size="small"
           onClick={() => setShowModal(true)}
-          className="file-finder-product__download"
+          className={styles.download}
           disabled={alreadyInstalled}
         >
           {alreadyInstalled ? 'Installed' : 'Download'}

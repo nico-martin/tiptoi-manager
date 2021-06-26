@@ -1,10 +1,8 @@
 import React from 'react';
-
 import cn from '@utils/classnames';
-import PenFile from '@app/PenFile';
 import { usePenFiles } from '@app/FilesContext';
-
-import './Pen.css';
+import PenFile from '@app/PenFile';
+import styles from './Pen.css';
 
 const Pen = ({ className = '' }: { className?: string }) => {
   const { files, reloadFiles } = usePenFiles();
@@ -14,11 +12,11 @@ const Pen = ({ className = '' }: { className?: string }) => {
   }, []);
 
   return (
-    <div className={cn(className, 'pen')}>
+    <div className={cn(className, styles.root)}>
       <h2>Audio Files on your pen:</h2>
-      <ul className="pen__list">
+      <ul className={styles.list}>
         {files.map(file => (
-          <li className="pen__file">
+          <li className={styles.file}>
             <PenFile file={file} />
           </li>
         ))}

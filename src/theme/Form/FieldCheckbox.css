@@ -1,49 +1,51 @@
-.field-checkbox {
-    &__input {
-        display: none;
-    }
+.root {
+}
 
-    &__label {
-        padding-left: 1.5em;
-        position: relative;
-        cursor: pointer;
+.input {
+  display: none;
+}
 
-        &:after, &:before {
-            content: '';
-            display: block;
-            position: absolute;
-            width: 1em;
-            height: 1em;
-            margin-top: -0.5em;
-            left: 0;
-            top: 50%;
-        }
+.label {
+  padding-left: 1.5em;
+  position: relative;
+  cursor: pointer;
 
-        &:after {
-            opacity: 0;
-            transition: opacity var(--transition-speed) var(--transition-function);
-            border-right: 3px solid var(--c-white);
-            border-bottom: 3px solid var(--c-white);
-            width: 0.5rem;
-            transform: scale(0.7) rotate(40deg) translateX(40%) translateY(-30%);
-        }
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    left: 0;
+    top: 50%;
+  }
 
-        &:before {
-            transition: all var(--transition-speed) var(--transition-function);
-            border: 1px solid var(--c-border-light);
-            border-radius: 0.1em;
-            transform: scale(1.1);
-        }
-    }
+  &:after {
+    opacity: 0;
+    transition: opacity var(--transition-speed) var(--transition-function);
+    border-right: 3px solid var(--c-white);
+    border-bottom: 3px solid var(--c-white);
+    width: 0.5rem;
+    transform: scale(0.7) rotate(40deg) translateX(40%) translateY(-30%);
+  }
 
-    &__input:checked + &__label {
-        &:after {
-            opacity: 1;
-        }
+  &:before {
+    transition: all var(--transition-speed) var(--transition-function);
+    border: 1px solid var(--c-border-light);
+    border-radius: 0.1em;
+    transform: scale(1.1);
+  }
+}
 
-        &:before {
-            background-color: var(--c-orange);
-            border-color: var(--c-orange);
-        }
-    }
+.input:checked + .label {
+  &:after {
+    opacity: 1;
+  }
+
+  &:before {
+    background-color: var(--c-orange);
+    border-color: var(--c-orange);
+  }
 }

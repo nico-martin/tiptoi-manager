@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from '@utils/classnames';
 
-import './SVG.css';
+import styles from './SVG.css';
 
 const SVG = ({
   path,
@@ -27,8 +27,8 @@ const SVG = ({
 
   return (
     <figure
-      className={cn(className, 'svg', {
-        'svg--inline': inline,
+      className={cn(className, styles.root, {
+        [styles.isInline]: inline,
       })}
       dangerouslySetInnerHTML={{ __html: loadedIcon }}
       {...props}

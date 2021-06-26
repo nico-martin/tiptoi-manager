@@ -1,8 +1,6 @@
 import React from 'react';
-
 import cn from '@utils/classnames';
-
-import './FieldRadio.css';
+import styles from './FieldRadio.css';
 
 const FieldRadio = ({
   className = '',
@@ -21,17 +19,17 @@ const FieldRadio = ({
   name: string;
   id: string;
 }) => (
-  <div className={cn(className, 'field-radio')}>
+  <div className={cn(className, styles.root)}>
     <input
       type="radio"
       checked={checked}
       onChange={e => onChange(e)}
       name={name}
       id={id}
-      className="field-radio__input"
+      className={styles.input}
       value={value}
     />
-    <label className="field-radio__label" for={id}>
+    <label className={styles.label} for={id}>
       {label}
     </label>
   </div>

@@ -1,23 +1,23 @@
-.directory-picker {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-width: 550px;
-    margin: 0 auto;
-    padding: 0 var(--space-grid);
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 0 var(--space-grid);
+}
 
-    &__error {
-        margin-bottom: var(--space-grid);
-    }
+.error {
+  margin-bottom: var(--space-grid);
+}
 
-    &__description {
-        margin-top: var(--space-grid);
-        width: 80%;
+.description {
+  margin-top: var(--space-grid);
+  width: 80%;
 
-        p + p {
-            margin-top: 0.5rem;
-        }
-    }
+  p + p {
+    margin-top: 0.5rem;
+  }
 }

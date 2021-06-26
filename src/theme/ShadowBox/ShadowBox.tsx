@@ -1,8 +1,7 @@
 import React from 'react';
 import cn from '@utils/classnames';
-
-import './ShadowBox.css';
 import { CloseButton } from '../index';
+import styles from './ShadowBox.css';
 
 export default ({
   title,
@@ -41,22 +40,24 @@ export default ({
 
   return (
     <div
-      className={cn(className, 'shadowbox', `shadowbox--${size}`)}
+      className={cn(className, styles.root, {
+        [styles.isSmall]: size === 'small',
+      })}
       data-visible={show}
     >
-      <div className="shadowbox__shadow" onClick={onClose} />
-      <article className="shadowbox__box">
+      <div className={styles.shadow} onClick={onClose} />
+      <article className={styles.box}>
         <header
-          className={cn('shadowbox__header', {
-            'shadowbox__header--shadow': shadow,
+          className={cn(styles.header, {
+            [styles.headerShadow]: shadow,
           })}
         >
-          {title !== null && <h1 className="shadowbox__title">{title}</h1>}{' '}
+          {title !== null && <h1 className={styles.title}>{title}</h1>}{' '}
           {!preventClose && (
-            <CloseButton className="shadowbox__close" onClick={onClose} />
+            <CloseButton className={styles.close} onClick={onClose} />
           )}
         </header>
-        <div className="shadowbox__content">{children}</div>
+        <div className={styles.content}>{children}</div>
       </article>
     </div>
   );

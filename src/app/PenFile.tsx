@@ -1,11 +1,10 @@
 import React from 'react';
-import { useDirHandle, usePenFiles } from '@app/FilesContext';
-import { deleteFile } from '@utils/fileSystem';
-import cn from '@utils/classnames';
-import { gmeFilesIndices, ProductI, products } from '@app/database';
 import { Button, ButtonGroup, ContentModal } from '@theme';
-
-import './PenFile.css';
+import cn from '@utils/classnames';
+import { deleteFile } from '@utils/fileSystem';
+import { useDirHandle, usePenFiles } from '@app/FilesContext';
+import { gmeFilesIndices, ProductI, products } from '@app/database';
+import styles from './PenFile.css';
 
 const PenFiles = ({
   className = '',
@@ -21,14 +20,14 @@ const PenFiles = ({
   const [deletePending, setDeletePending] = React.useState<boolean>(false);
 
   return (
-    <div className="pen-file">
+    <div className={cn(className, styles.root)}>
       {deleteModal && (
         <ContentModal
           title="Delete file"
           onClose={() => setDeleteModal(false)}
           full={false}
         >
-          <div className="pen-file__delete-desc">
+          <div className={styles.deleteDesc}>
             <p>Are you sure you want to delete the following file?</p>
             <p>{file.name}</p>
           </div>
@@ -50,7 +49,7 @@ const PenFiles = ({
         </ContentModal>
       )}
       {product?.name || file.name.replace('.gme', '')}
-      <button onClick={() => setDeleteModal(true)} className="pen-file__delete">
+      <button onClick={() => setDeleteModal(true)} className={styles.delete}>
         delete
       </button>
     </div>

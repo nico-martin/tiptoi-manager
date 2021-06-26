@@ -1,11 +1,9 @@
 import React from 'react';
-
-import { products, productCategories, ProductI } from '@app/database';
 import cn from '@utils/classnames';
-import FileFinderProduct from '@app/FileFinderProduct';
 import FileFinderForm from '@app/FileFinderForm';
-
-import './FileFinder.css';
+import FileFinderProduct from '@app/FileFinderProduct';
+import { products, productCategories, ProductI } from '@app/database';
+import styles from './FileFinder.css';
 
 const FileFinder = ({ className = '' }: { className?: string }) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
@@ -24,22 +22,17 @@ const FileFinder = ({ className = '' }: { className?: string }) => {
   );
 
   return (
-    <div className={cn(className, 'file-finder')}>
-      <h2 className="file-finder__title">Searchfilter</h2>
+    <div className={cn(className, styles.root)}>
+      <h2 className={styles.title}>Searchfilter</h2>
       <FileFinderForm
         setSearchTerm={setSearchTerm}
         checkedCategories={checkedCategories}
         setCheckedCategories={setCheckedCategories}
       />
-      <h2 className="file-finder__title file-finder__title--products">
-        Products
-      </h2>
-      <div className="file-finder__list">
+      <h2 className={cn(styles.title, styles.titleProducts)}>Products</h2>
+      <div className={styles.list}>
         {results.map(product => (
-          <FileFinderProduct
-            className="file-finder__list-item"
-            product={product}
-          />
+          <FileFinderProduct className={styles.listItem} product={product} />
         ))}
       </div>
     </div>

@@ -1,5 +1,5 @@
-.file-finder-install {
-    & > * + * {
-        margin-top: 2rem;
-    }
+.root {
+  & > * + * {
+    margin-top: 2rem;
+  }
 }

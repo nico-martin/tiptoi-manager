@@ -1,8 +1,6 @@
 import React from 'react';
-
 import cn from '@utils/classnames';
-
-import './FieldInput.css';
+import styles from './FieldInput.css';
 
 const FieldInput = ({
   className = '',
@@ -22,7 +20,7 @@ const FieldInput = ({
   [key: string]: any;
 }) => (
   <input
-    className={cn(className, 'field-input')}
+    className={cn(className, styles.root)}
     value={value}
     type={type}
     onChange={e => onChange(e)}

@@ -5,10 +5,10 @@ require('dotenv').config();
 
 import app from './app.json';
 
-import { DefinePlugin } from 'webpack';
+import {DefinePlugin} from 'webpack';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import workboxPlugin from 'workbox-webpack-plugin';
@@ -77,13 +77,13 @@ module.exports = (env, argv) => {
         minify: dev
           ? false
           : {
-              collapseWhitespace: true,
-              removeComments: true,
-              removeRedundantAttributes: true,
-              removeScriptTypeAttributes: true,
-              removeStyleLinkTypeAttributes: true,
-              useShortDoctype: true,
-            },
+            collapseWhitespace: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true,
+          },
       }),
       new WebpackPwaManifest({
         name: app.title,
@@ -106,12 +106,12 @@ module.exports = (env, argv) => {
       }),
       ...(!dev
         ? [
-            new workboxPlugin.InjectManifest({
-              swSrc: './src/service-worker.js',
-              include: [/\.html$/, /\.js$/, /\.css$/],
-              maximumFileSizeToCacheInBytes: 5000000,
-            }),
-          ]
+          new workboxPlugin.InjectManifest({
+            swSrc: './src/service-worker.js',
+            include: [/\.html$/, /\.js$/, /\.css$/],
+            maximumFileSizeToCacheInBytes: 5000000,
+          }),
+        ]
         : []),
       new DefinePlugin({
         IS_DEV: JSON.stringify(dev),
@@ -153,7 +153,15 @@ module.exports = (env, argv) => {
                 //reloadAll: true,
               },
             },
-            'css-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: {
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
+                }
+              }
+            },
             {
               loader: 'postcss-loader',
               options: {

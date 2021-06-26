@@ -1,9 +1,7 @@
 import React from 'react';
-
-import { Loader, ShadowBox } from '../index';
 import cn from '@utils/classnames';
-
-import './ContentModal.css';
+import { Loader, ShadowBox } from '../index';
+import styles from './ContentModal.css';
 
 const ContentModal = ({
   title,
@@ -26,12 +24,12 @@ const ContentModal = ({
     <ShadowBox
       title={title}
       close={onClose}
-      className={cn(className, 'content-modal')}
+      className={cn(className, styles.root)}
       size={full ? 'large' : 'small'}
       preventClose={preventClose}
     >
-      <div className="content-modal__content">
-        {loading ? <Loader className="content-modal__loader" /> : children}
+      <div className={styles.content}>
+        {loading ? <Loader className={styles.loader} /> : children}
       </div>
     </ShadowBox>
   </React.Fragment>

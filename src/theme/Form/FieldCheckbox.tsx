@@ -1,8 +1,6 @@
 import React from 'react';
-
 import cn from '@utils/classnames';
-
-import './FieldCheckbox.css';
+import styles from './FieldCheckbox.css';
 
 const FieldCheckbox = ({
   className = '',
@@ -25,18 +23,18 @@ const FieldCheckbox = ({
   checked: boolean;
   [key: string]: any;
 }) => (
-  <div className={cn(className, 'field-checkbox')}>
+  <div className={cn(className, styles.root)}>
     <input
-      className="field-checkbox__input"
+      className={styles.input}
       value={value}
       type="checkbox"
-      onChange={(e) => onChange(e)}
+      onChange={e => onChange(e)}
       name={name}
       id={id}
       checked={checked}
       {...props}
     />
-    <label className="field-checkbox__label" htmlFor={id}>
+    <label className={styles.label} htmlFor={id}>
       {label}
     </label>
   </div>

@@ -1,4 +1,4 @@
-.icon {
+.root {
   display: inline-block;
   line-height: 1;
 
@@ -10,50 +10,30 @@
     width: 1em;
     display: block;
   }
+}
 
-  &--border {
-    border: 1px solid currentColor;
-    height: 1em;
-    line-height: 1em;
-    width: 1em;
-    text-align: center;
+.hasBorder {
+  border: 1px solid currentColor;
+  height: 1em;
+  line-height: 1em;
+  width: 1em;
+  text-align: center;
 
-    svg {
-      height: 0.6em;
-      vertical-align: inherit;
-    }
+  svg {
+    height: 0.6em;
+    vertical-align: inherit;
   }
+}
 
-  &--round {
-    border-radius: 9999px;
-  }
+.isRound {
+  border-radius: 9999px;
+}
 
-  &--animation-spin {
-    animation: spinner 2s infinite linear;
-  }
+.isCircle {
+  border: 1px solid currentColor;
+  border-radius: 50%;
 
-  &--animation-spin-1s {
-    animation: spinner 1s infinite linear;
-  }
-
-  &--rotate-90 {
-    transform: rotate(90deg);
-  }
-
-  &--rotate-180 {
-    transform: rotate(180deg);
-  }
-
-  &--rotate-270 {
-    transform: rotate(270deg);
-  }
-
-  &--circle {
-    border: 1px solid currentColor;
-    border-radius: 50%;
-
-    svg {
-      transform: scale(0.7);
-    }
+  svg {
+    transform: scale(0.7);
   }
 }
