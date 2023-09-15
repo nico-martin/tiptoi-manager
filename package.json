@@ -16,9 +16,11 @@
     "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@types/wicg-file-system-access": "^2020.9.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-popper": "^2.3.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",

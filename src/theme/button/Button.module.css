@@ -1,28 +1,62 @@
 .root {
+  --button-font-size: 1rem;
+  --button-color: var(--c-orange);
+  --button-text-color: #fff;
+
   cursor: pointer;
   font-weight: 400;
   line-height: 1;
   padding: 0.8em 1em;
   position: relative;
-  color: var(--c-orange);
+  color: var(--button-color);
   display: flex;
   align-items: center;
   transition: all 200ms ease-in-out;
-}
+  font-size: var(--button-font-size);
 
-.fontWeight-bold {
-}
+  &:has(.iconLeft) {
+    padding-left: 2.8em;
+  }
 
-.fontWeight-normal {
-  font-weight: normal;
+  &:has(.iconRight) {
+    padding-right: 2.8em;
+  }
+
+  &:not:has(.content) {
+    padding: 0.5em;
+
+    .iconLeft {
+      margin-right: 0;
+    }
+
+    .iconRight {
+      margin-left: 0;
+    }
+  }
+
+  &.isDisabled,
+  :disabled {
+    pointer-events: none;
+    opacity: 0.5;
+
+    .bkg {
+      background-color: var(--c-p);
+    }
+
+    .icon {
+      color: var(--c-p);
+    }
+  }
+
+  &.colorBlack {
+    --button-color: var(--c-p);
+    --button-text-color: #fff;
+  }
 }
 
 .bkg {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  top: 0;
+  inset: 0;
   background-color: currentColor;
   opacity: 0.8;
   will-change: opacity;
@@ -30,16 +64,12 @@
   border-radius: 999px;
 }
 
-.hasIcon-left {
-  padding-left: 2.8em;
-}
-
-.hasIcon-right {
-  padding-right: 2.8em;
+.root:hover .bkg {
+  opacity: 1;
 }
 
 .icon {
-  color: var(--c-orange);
+  color: var(--button-color);
   will-change: opacity;
   transition: opacity 200ms ease-in-out;
   display: block;
@@ -53,58 +83,10 @@
   margin-left: 0.4em;
 }
 
-.icon-right {
+.iconRight {
   left: auto;
   right: 0;
   margin-right: 0.4em;
-}
-
-.hasNnotext {
-  padding: 0.5em;
-
-  .icon-left {
-    margin-right: 0;
-  }
-
-  .icon-right {
-    margin-left: 0;
-  }
-}
-
-.size {
-  &-small {
-    font-size: 0.8rem;
-  }
-
-  &-large {
-    font-size: 1.5rem;
-  }
-}
-
-.isDisabled {
-  pointer-events: none;
-  opacity: 0.5;
-
-  .bkg {
-    background-color: var(--c-p);
-  }
-
-  .icon {
-    color: var(--c-p);
-  }
-}
-
-.root:hover {
-  .button__bkg {
-    opacity: 1;
-  }
-
-  //background-color: var(--c-hellgrau);
-}
-
-.root:focus {
-  outline: none;
-  @mixin a11y-focus;
 }
 
 .loader {
@@ -114,7 +96,7 @@
   transform: translateX(-50%) translateY(-50%);
   width: 1em;
   height: 1em;
-  color: #fff;
+  color: var(--button-text-color);
   opacity: 0;
   will-change: opacity;
   transition: opacity 200ms ease-in-out;
@@ -124,7 +106,7 @@
 .content {
   position: relative;
   z-index: 1;
-  color: #fff;
+  color: var(--button-text-color);
   opacity: 1;
   will-change: opacity;
   transition: opacity 200ms ease-in-out;
@@ -141,13 +123,23 @@
   }
 }
 
-.color-orange {
+.root.sizeSmall {
+  --button-font-size: 0.8rem;
 }
 
-.color-black {
-  color: var(--c-p);
+.root.sizeLarge {
+  --button-font-size: 1.5rem;
+}
 
-  .icon {
-    color: var(--c-p);
+.layoutGhost {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  --button-color: transparent;
+  --button-text-color: var(--c-orange);
+
+  &.colorBlack {
+    --button-color: transparent;
+    --button-text-color: var(--c-p);
   }
 }

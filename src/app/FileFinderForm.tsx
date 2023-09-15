@@ -29,13 +29,9 @@ const FileFinderForm: React.FC<{
               id="all"
               value="all"
               label="Alle"
-              onChange={(e) =>
-                setCheckedCategories(
-                  (e.target as HTMLInputElement).checked
-                    ? productCategories
-                    : []
-                )
-              }
+              onChange={(e) => {
+                setCheckedCategories(e.target.checked ? productCategories : []);
+              }}
               checked={checkedCategories.length === productCategories.length}
               className={styles.categoryInput}
             />
@@ -48,13 +44,13 @@ const FileFinderForm: React.FC<{
               id={cat}
               value={cat}
               label={cat}
-              onChange={(e) =>
+              onChange={(e) => {
                 setCheckedCategories(
-                  (e.target as HTMLInputElement).checked
+                  e.target.checked
                     ? [...checkedCategories, cat]
                     : checkedCategories.filter((c) => c !== cat)
-                )
-              }
+                );
+              }}
               checked={checkedCategories.includes(cat)}
               className={styles.categoryInput}
             />

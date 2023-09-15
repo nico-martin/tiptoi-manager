@@ -1,15 +1,15 @@
 .root {
   display: inline-block;
   line-height: 1;
+}
 
-  svg {
-    text-align: center;
-    vertical-align: middle;
-    fill: currentColor;
-    height: 1em;
-    width: 1em;
-    display: block;
-  }
+.root svg {
+  text-align: center;
+  vertical-align: middle;
+  fill: currentColor;
+  height: 1em;
+  width: 1em;
+  display: block;
 }
 
 .hasBorder {
@@ -18,11 +18,11 @@
   line-height: 1em;
   width: 1em;
   text-align: center;
+}
 
-  svg {
-    height: 0.6em;
-    vertical-align: inherit;
-  }
+.hasBorder svg {
+  height: 0.6em;
+  vertical-align: inherit;
 }
 
 .isRound {
@@ -32,8 +32,8 @@
 .isCircle {
   border: 1px solid currentColor;
   border-radius: 50%;
+}
 
-  svg {
-    transform: scale(0.7);
-  }
+.isCircle svg {
+  transform: scale(0.7);
 }

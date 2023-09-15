@@ -57,7 +57,7 @@ export default defineConfig({
       key: fs.readFileSync(process.env.SSL_KEY),
       cert: fs.readFileSync(process.env.SSL_CRT),
     },
-    port: 3000,
+    port: Number(process.env.PORT) || 3000,
   },
   plugins: [
     react(),
@@ -82,21 +82,6 @@ export default defineConfig({
         scope: '/',
         id: '/',
         icons,
-        file_handlers: [
-          {
-            action: '/',
-            accept: {
-              'text/markdown': ['.md'],
-            },
-          },
-        ],
-        screenshots: [
-          {
-            src: '/facebook.jpg',
-            type: 'image/png',
-            sizes: '1200x630',
-          },
-        ],
       },
     }),
     htmlPlugin({
@@ -106,10 +91,10 @@ export default defineConfig({
           name: 'description',
           content: app.description,
         },
-        /*{
+        {
           name: 'og:image',
           content: '/facebook.jpg',
-        },*/
+        },
         {
           name: 'og:title',
           content: app.title,
@@ -146,10 +131,10 @@ export default defineConfig({
           name: 'twitter:image',
           content: 'en_US',
         },
-        /*{
+        {
           name: 'twitter:type',
           content: '/twitter.jpg',
-        },*/
+        },
       ],
     }),
   ],

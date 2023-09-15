@@ -7,7 +7,7 @@ import styles from './FieldCheckbox.module.css';
 const FieldCheckbox: React.FC<{
   className?: string;
   value: string;
-  onChange: Function;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   name: string;
   id: string;

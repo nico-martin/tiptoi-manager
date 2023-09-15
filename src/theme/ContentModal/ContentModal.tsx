@@ -2,7 +2,7 @@ import React from 'react';
 
 import cn from '@utils/classnames';
 
-import { Loader, ShadowBox } from '../index';
+import { Loader, PortalBox } from '../index';
 import styles from './ContentModal.module.css';
 
 const ContentModal: React.FC<{
@@ -23,7 +23,7 @@ const ContentModal: React.FC<{
   preventClose = false,
 }) => (
   <React.Fragment>
-    <ShadowBox
+    <PortalBox
       title={title}
       close={onClose}
       className={cn(className, styles.root)}
@@ -33,7 +33,7 @@ const ContentModal: React.FC<{
       <div className={styles.content}>
         {loading ? <Loader className={styles.loader} /> : children}
       </div>
-    </ShadowBox>
+    </PortalBox>
   </React.Fragment>
 );
 

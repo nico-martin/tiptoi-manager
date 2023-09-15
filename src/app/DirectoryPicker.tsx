@@ -1,14 +1,14 @@
 import { Button, Notification } from '@theme';
 import React from 'react';
 
-import { useDirHandle, usePenFiles } from '@app/FilesContext';
+import { useDirHandle } from '@app/FilesContext';
 
 import { getDirectoryEntries, getDirectoryHandle } from '@utils/fileSystem';
 
 import styles from './DirectoryPicker.module.css';
 
 const DirectoryPicker: React.FC = () => {
-  const [dirHandle, setDirHandle] = useDirHandle();
+  const [, setDirHandle] = useDirHandle();
 
   const [pendig, setPending] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>('');
@@ -21,10 +21,10 @@ const DirectoryPicker: React.FC = () => {
         </Notification>
       )}
       <Button
-        size="large"
         icon="pen"
         onClick={() => {
           setError('');
+          setPending(true);
           getDirectoryHandle()
             .then((handle) => {
               Promise.all([handle, getDirectoryEntries(handle)]).then(
@@ -45,19 +45,13 @@ const DirectoryPicker: React.FC = () => {
             .catch((e) => {
               setError('An unexpected error occured');
               console.error(e);
-            });
+            })
+            .finally(() => setPending(false));
         }}
         disabled={pendig}
       >
-        select pen
+        connect pen
       </Button>
-      <div className={styles.description}>
-        <p>
-          Please connect your Tiptoi pen to your computer using the supplied USB
-          cable first.
-        </p>
-        <p>Then you can select the pen using the button above.</p>
-      </div>
     </div>
   );
 };

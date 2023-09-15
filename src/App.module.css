@@ -8,6 +8,7 @@
   height: 6rem;
   position: relative;
   z-index: 20;
+  border-bottom: 1px solid var(--c-border-light);
 }
 
 .main {
@@ -23,12 +24,14 @@
 }
 
 .pen {
+  padding-top: var(--space-grid);
   margin: 0 var(--space-grid);
   flex: 1 0 30vw;
   height: 100%;
 }
 
 .filefinder {
+  padding-top: var(--space-grid);
   margin: 0 var(--space-grid);
   height: 100%;
 }

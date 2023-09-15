@@ -3,8 +3,7 @@ import React from 'react';
 import cn from '@utils/classnames';
 
 import styles from './Icon.module.css';
-import SVG from './SVG';
-import { IconType } from './icons.ts';
+import icons, { IconType } from './icons.ts';
 
 const Icon: React.FC<{
   icon: IconType;
@@ -23,9 +22,14 @@ const Icon: React.FC<{
   circle = false,
   ...props
 }) => {
+  const LoadedIcon = React.useMemo(
+    () => (icon in icons ? icons[icon] : null),
+    [icon]
+  );
+
   return (
-    <SVG
-      className={cn(className, styles.icon, {
+    <span
+      className={cn(className, styles.root, {
         [styles.rotate90]: rotate === 90,
         [styles.rotate180]: rotate === 180,
         [styles.rotate270]: rotate === 270,
@@ -33,9 +37,10 @@ const Icon: React.FC<{
         [styles.isRound]: round,
         [styles.isCircle]: circle,
       })}
-      icon={icon}
       {...props}
-    />
+    >
+      <LoadedIcon />
+    </span>
   );
 };
 

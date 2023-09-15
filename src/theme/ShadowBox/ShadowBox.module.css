@@ -113,7 +113,7 @@
   transform: translateX(-50%) translateY(-30%) scale(0.9);
 }
 
-&[data-visible='true'] {
+.root[data-visible='true'] {
   .box {
     opacity: 1;
     transform: translateX(-50%) translateY(-50%) scale(1);

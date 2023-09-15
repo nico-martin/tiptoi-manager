@@ -9,7 +9,7 @@ const Button: React.FC<{
   children?: React.JSX.Element | React.JSX.Element[] | string;
   className?: string;
   onClick?: Function;
-  layout?: 'solid';
+  layout?: 'solid' | 'ghost';
   icon?: IconType;
   iconRight?: boolean;
   size?: 'medium' | 'small' | 'large';
@@ -35,29 +35,24 @@ const Button: React.FC<{
   <button
     {...props}
     disabled={disabled}
-    className={cn(
-      className,
-      styles.root,
-      styles[`size-${size}`],
-      styles[`color-${color}`],
-      styles[`fontWeight-${fontWeight}`],
-      {
-        [styles.isLoading]: loading,
-        [styles.isDisabled]: disabled,
-        [styles.hasNnotext]: children === '',
-        [styles[`hasIcon-${iconRight ? 'right' : 'left'}`]]: Boolean(icon),
-      }
-    )}
+    className={cn(className, styles.root, {
+      [styles.sizeSmall]: size === 'small',
+      [styles.sizeLarge]: size === 'large',
+      [styles.colorBlack]: color === 'black',
+      [styles.isLoading]: loading,
+      [styles.isDisabled]: disabled,
+      [styles.layoutGhost]: layout === 'ghost',
+    })}
     onClick={() => onClick()}
   >
     <div className={styles.bkg} />
     <Loader className={styles.loader} />
     {Boolean(icon) && !iconRight && (
-      <Icon className={cn(styles.icon, styles[`icon-left`])} icon={icon} />
+      <Icon className={cn(styles.icon, styles.iconLeft)} icon={icon} />
     )}
-    <span className={styles.content}>{children}</span>
+    {Boolean(children) && <span className={styles.content}>{children}</span>}
     {Boolean(icon) && iconRight && (
-      <Icon className={cn(styles.icon, styles[`icon-right`])} icon={icon} />
+      <Icon className={cn(styles.icon, styles.iconRight)} icon={icon} />
     )}
   </button>
 );

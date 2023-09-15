@@ -5,7 +5,7 @@
   "color": "#106672",
   "colorbkg": "#eaeaea",
   "iconImages": [
-    "public/fav/icon/icon.png"
+    "public/fav/icon/icon.svg"
   ],
   "iconSizes": [
     96,

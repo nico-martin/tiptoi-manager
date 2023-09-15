@@ -1,0 +1,40 @@
+.tooltip {
+  will-change: opacity;
+  transition: opacity 200ms ease-in-out;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tooltipShow {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tooltipInner {
+  background-color: var(--c-p);
+  color: var(--c-white);
+  border-radius: 0.4em;
+  padding: 0.5em 0.75em;
+  font-size: var(--fs-small);
+  margin-top: 1em;
+  position: relative;
+}
+
+.arrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  transform: translateX(-50%) translateY(-50%);
+  position: absolute;
+  left: 50%;
+  top: 0;
+
+  &::before {
+    content: '';
+    transform: rotate(45deg);
+    background-color: var(--c-p);
+    inset: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}

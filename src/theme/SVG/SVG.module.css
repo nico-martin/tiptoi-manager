@@ -1,13 +1,6 @@
-.root {
-  svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+.root svg {
 }
 
 .isInline {
-  width: 1em;
-  height: 1em;
   display: inline-block;
 }

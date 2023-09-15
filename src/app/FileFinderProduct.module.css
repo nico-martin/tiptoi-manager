@@ -17,4 +17,5 @@
 .download {
   margin-top: auto;
   align-self: center;
+  display: inline-block;
 }

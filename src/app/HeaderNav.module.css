@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.element {
+  font-size: 0.8rem;
+}
+
+.elementInstall {
+  margin-left: var(--space-grid-half);
+}
+
+.content {
+  & > * {
+    & + * {
+      margin-top: var(--space);
+    }
+
+    & + h2 {
+      margin-top: var(--space-l);
+    }
+  }
+
+  a {
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+}

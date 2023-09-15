@@ -1,2 +1,4 @@
-export const appTitle = APP_TITLE;
-export const appDescription = APP_DESCRIPTION;
+import app from '../../app.json';
+
+export const appTitle = app.title;
+export const appDescription = app.description;
