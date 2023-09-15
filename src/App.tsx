@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { Notification } from '@theme';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
 import DirectoryPicker from '@app/DirectoryPicker';
 import FileFinder from '@app/FileFinder';
 import { FilesContextProvider, useDirHandle } from '@app/FilesContext';
 import Header from '@app/Header';
 import Pen from '@app/Pen';
-import styles from './App.css';
 
-const AppElement = document.querySelector(`#app`);
+import styles from './App.module.css';
 
 const App = () => {
   const [dirHandle] = useDirHandle();
@@ -35,11 +35,11 @@ const App = () => {
   );
 };
 
-if (AppElement) {
-  ReactDOM.render(
+const root = document.getElementById('app');
+
+root &&
+  ReactDOM.createRoot(root).render(
     <FilesContextProvider>
       <App />
-    </FilesContextProvider>,
-    AppElement
+    </FilesContextProvider>
   );
-}

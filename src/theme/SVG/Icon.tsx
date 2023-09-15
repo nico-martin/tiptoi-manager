@@ -1,28 +1,39 @@
 import React from 'react';
-import cn from '@utils/classnames';
-import styles from './Icon.css';
-import SVG from './SVG';
 
-const Icon = ({
-  icon,
-  className = '',
-  round = false,
-  circle = false,
-  ...props
-}: {
-  icon: string;
+import cn from '@utils/classnames';
+
+import styles from './Icon.module.css';
+import SVG from './SVG';
+import { IconType } from './icons.ts';
+
+const Icon: React.FC<{
+  icon: IconType;
   className?: string;
+  rotate?: 90 | 180 | 270 | false;
+  spinning?: boolean;
   round?: boolean;
   circle?: boolean;
   [key: string]: any;
+}> = ({
+  icon,
+  className = '',
+  spinning = false,
+  rotate = false,
+  round = false,
+  circle = false,
+  ...props
 }) => {
   return (
     <SVG
-      className={cn(className, styles.root, {
+      className={cn(className, styles.icon, {
+        [styles.rotate90]: rotate === 90,
+        [styles.rotate180]: rotate === 180,
+        [styles.rotate270]: rotate === 270,
+        [styles.isSpinning]: spinning,
         [styles.isRound]: round,
         [styles.isCircle]: circle,
       })}
-      path={`icon/${icon}.svg`}
+      icon={icon}
       {...props}
     />
   );

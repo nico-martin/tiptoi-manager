@@ -1,18 +1,18 @@
-import React from 'react';
 import { Button, ButtonGroup, ContentModal } from '@theme';
+import React from 'react';
+
+import { useDirHandle, usePenFiles } from '@app/FilesContext';
+import { ProductI, gmeFilesIndices, products } from '@app/database';
+
 import cn from '@utils/classnames';
 import { deleteFile } from '@utils/fileSystem';
-import { useDirHandle, usePenFiles } from '@app/FilesContext';
-import { gmeFilesIndices, ProductI, products } from '@app/database';
-import styles from './PenFile.css';
 
-const PenFiles = ({
-  className = '',
-  file,
-}: {
+import styles from './PenFile.module.css';
+
+const PenFiles: React.FC<{
   className?: string;
   file: FileSystemFileHandle;
-}) => {
+}> = ({ className = '', file }) => {
   const [dirHandle] = useDirHandle();
   const { reloadFiles } = usePenFiles();
   const product: ProductI = products[gmeFilesIndices[file.name]] || null;

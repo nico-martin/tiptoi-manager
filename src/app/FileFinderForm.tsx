@@ -1,21 +1,19 @@
-import React from 'react';
 import { FieldCheckbox } from '@theme';
-import { productCategories } from '@app/database';
-import styles from './FileFinderForm.css';
+import React from 'react';
 
-const FileFinderForm = ({
-  setSearchTerm,
-  checkedCategories,
-  setCheckedCategories,
-}: {
+import { productCategories } from '@app/database';
+
+import styles from './FileFinderForm.module.css';
+
+const FileFinderForm: React.FC<{
   setSearchTerm: (term: string) => void;
   checkedCategories: Array<string>;
   setCheckedCategories: (categories: Array<string>) => void;
-}) => {
+}> = ({ setSearchTerm, checkedCategories, setCheckedCategories }) => {
   return (
     <div className={styles.root}>
       <input
-        onKeyUp={e => setSearchTerm((e.target as HTMLInputElement).value)}
+        onKeyUp={(e) => setSearchTerm((e.target as HTMLInputElement).value)}
         name="searchTerm"
         id="searchTerm"
         type="text"
@@ -31,7 +29,7 @@ const FileFinderForm = ({
               id="all"
               value="all"
               label="Alle"
-              onChange={e =>
+              onChange={(e) =>
                 setCheckedCategories(
                   (e.target as HTMLInputElement).checked
                     ? productCategories
@@ -43,18 +41,18 @@ const FileFinderForm = ({
             />
           </label>
         </li>
-        {productCategories.map(cat => (
+        {productCategories.map((cat) => (
           <li className={styles.category}>
             <FieldCheckbox
               name={cat}
               id={cat}
               value={cat}
               label={cat}
-              onChange={e =>
+              onChange={(e) =>
                 setCheckedCategories(
                   (e.target as HTMLInputElement).checked
                     ? [...checkedCategories, cat]
-                    : checkedCategories.filter(c => c !== cat)
+                    : checkedCategories.filter((c) => c !== cat)
                 )
               }
               checked={checkedCategories.includes(cat)}

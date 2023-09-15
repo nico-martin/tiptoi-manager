@@ -1,4 +1,8 @@
+.DS_Store
 node_modules/
-.idea/
-.env
+npm-debug.log
+.idea
+.htaccess
 dist/
+.env
+.idea/

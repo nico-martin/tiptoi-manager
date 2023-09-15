@@ -3,8 +3,8 @@ const cn = (...classes: Array<Record<string, boolean> | string>): string =>
     .map((entry) =>
       typeof entry === 'string'
         ? entry
-        : Object.entries(entry)
-            .filter(([cl, append]) => append)
+        : Object.entries(entry || {})
+            .filter(([, append]) => append)
             .map(([cl]) => cl)
             .join(' ')
     )

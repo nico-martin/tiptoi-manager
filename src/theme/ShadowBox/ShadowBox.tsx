@@ -1,22 +1,24 @@
 import React from 'react';
-import cn from '@utils/classnames';
-import { CloseButton } from '../index';
-import styles from './ShadowBox.css';
 
-export default ({
-  title,
-  children,
-  close,
-  size = 'large',
-  className = '',
-  preventClose,
-}: {
+import cn from '@utils/classnames';
+
+import { CloseButton } from '../index';
+import styles from './ShadowBox.module.css';
+
+const ShadowBox: React.FC<{
   title?: string;
   children?: React.JSX.Element | React.JSX.Element[] | string;
   close: Function;
   size?: 'large' | 'small';
   className?: string;
   preventClose?: boolean;
+}> = ({
+  title,
+  children,
+  close,
+  size = 'large',
+  className = '',
+  preventClose,
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
   const [shadow, setShadow] = React.useState<boolean>(false);
@@ -62,3 +64,5 @@ export default ({
     </div>
   );
 };
+
+export default ShadowBox;

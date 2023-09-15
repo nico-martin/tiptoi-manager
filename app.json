@@ -3,5 +3,16 @@
   "short": "tiptoi-manager",
   "description": "A software to manage tiptoi audio files",
   "color": "#106672",
-  "colorbkg": "#eaeaea"
+  "colorbkg": "#eaeaea",
+  "iconImages": [
+    "public/fav/icon/icon.png"
+  ],
+  "iconSizes": [
+    96,
+    128,
+    192,
+    256,
+    384,
+    512
+  ]
 }

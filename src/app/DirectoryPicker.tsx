@@ -1,10 +1,13 @@
-import React from 'react';
 import { Button, Notification } from '@theme';
-import { getDirectoryEntries, getDirectoryHandle } from '@utils/fileSystem';
-import { useDirHandle, usePenFiles } from '@app/FilesContext';
-import styles from './DirectoryPicker.css';
+import React from 'react';
 
-const DirectoryPicker = () => {
+import { useDirHandle, usePenFiles } from '@app/FilesContext';
+
+import { getDirectoryEntries, getDirectoryHandle } from '@utils/fileSystem';
+
+import styles from './DirectoryPicker.module.css';
+
+const DirectoryPicker: React.FC = () => {
   const [dirHandle, setDirHandle] = useDirHandle();
 
   const [pendig, setPending] = React.useState<boolean>(false);
@@ -19,15 +22,15 @@ const DirectoryPicker = () => {
       )}
       <Button
         size="large"
-        icon="mdi/pen"
+        icon="pen"
         onClick={() => {
           setError('');
           getDirectoryHandle()
-            .then(handle => {
+            .then((handle) => {
               Promise.all([handle, getDirectoryEntries(handle)]).then(
                 ([handle, entries]) => {
                   const icoFile = entries.find(
-                    entry =>
+                    (entry) =>
                       entry.kind === 'file' && entry.name === 'tiptoi.ico'
                   );
 
@@ -39,7 +42,7 @@ const DirectoryPicker = () => {
                 }
               );
             })
-            .catch(e => {
+            .catch((e) => {
               setError('An unexpected error occured');
               console.error(e);
             });

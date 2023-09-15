@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getDirectoryEntries } from '@utils/fileSystem';
 
 interface ContextI {
@@ -10,15 +11,14 @@ interface ContextI {
 
 const FilesContext = React.createContext<ContextI>({
   files: [],
-  setFiles: files => {},
+  setFiles: () => {},
   dirHandle: null,
-  setDirHandle: handle => {},
+  setDirHandle: () => {},
 });
 
 export const FilesContextProvider = ({ children }: { children?: any }) => {
-  const [dirHandle, setDirHandle] = React.useState<FileSystemDirectoryHandle>(
-    null
-  );
+  const [dirHandle, setDirHandle] =
+    React.useState<FileSystemDirectoryHandle>(null);
   const [files, setFiles] = React.useState<Array<FileSystemFileHandle>>([]);
   return (
     <FilesContext.Provider
@@ -42,9 +42,9 @@ export const usePenFiles = (): {
   return {
     files,
     reloadFiles: () => {
-      getDirectoryEntries(dirHandle).then(entries => {
+      getDirectoryEntries(dirHandle).then((entries) => {
         const gmeFiles = entries.filter(
-          entry =>
+          (entry) =>
             entry.kind === 'file' &&
             entry.name.split('.').pop() === 'gme' &&
             entry.name !== 'Stickerbogen_Starterset.gme' &&

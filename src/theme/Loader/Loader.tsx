@@ -1,8 +1,10 @@
 import React from 'react';
-import cn from '@utils/classnames';
-import styles from './Loader.css';
 
-const Loader = ({ className = '' }: { className?: string }) => (
+import cn from '@utils/classnames';
+
+import styles from './Loader.module.css';
+
+const Loader: React.FC<{ className?: string }> = ({ className = '' }) => (
   <svg
     className={cn(styles.root, className)}
     viewBox="0 0 40 40"

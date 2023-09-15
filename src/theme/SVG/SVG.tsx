@@ -1,39 +1,36 @@
 import React from 'react';
+
 import cn from '@utils/classnames';
 
-import styles from './SVG.css';
+import styles from './SVG.module.css';
+import icons, { IconType } from './icons.ts';
 
 const SVG = ({
-  path,
+  icon,
   className = '',
   inline = false,
   ...props
 }: {
-  path: string;
+  icon: IconType;
   className?: string;
   inline?: boolean;
   [key: string]: any;
 }) => {
-  const [loadedIcon, setLoadedIcon] = React.useState('');
+  const LoadedIcon = React.useMemo(
+    () => (icon in icons ? icons[icon] : null),
+    [icon]
+  );
 
-  React.useEffect(() => {
-    async function loadIcon() {
-      return await import(
-        /* webpackMode: "eager" */ `../../assets/static/${path}`
-      );
-    }
-    loadIcon().then(loaded => setLoadedIcon(loaded.default));
-  }, [path]);
-
-  return (
+  return LoadedIcon ? (
     <figure
       className={cn(className, styles.root, {
-        [styles.isInline]: inline,
+        [styles.in]: inline,
       })}
-      dangerouslySetInnerHTML={{ __html: loadedIcon }}
       {...props}
-    />
-  );
+    >
+      <LoadedIcon />
+    </figure>
+  ) : null;
 };
 
 export default SVG;

@@ -1,18 +1,18 @@
-import React from 'react';
 import { Button } from '@theme';
-import cn from '@utils/classnames';
+import React from 'react';
+
 import FileFinderInstall from '@app/FileFinderInstall';
 import { usePenFiles } from '@app/FilesContext';
 import { ProductI } from '@app/database';
-import styles from './FileFinderProduct.css';
 
-const FileFinderProduct = ({
-  className = '',
-  product,
-}: {
+import cn from '@utils/classnames';
+
+import styles from './FileFinderProduct.module.css';
+
+const FileFinderProduct: React.FC<{
   className?: string;
   product: ProductI;
-}) => {
+}> = ({ className = '', product }) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const { files } = usePenFiles();
 
@@ -53,7 +53,7 @@ const FileFinderProduct = ({
       <p className={styles.title}>{product.name}</p>
       {gameFile && (
         <Button
-          icon="mdi/download"
+          icon="download"
           size="small"
           onClick={() => setShowModal(true)}
           className={styles.download}

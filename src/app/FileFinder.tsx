@@ -1,21 +1,23 @@
 import React from 'react';
-import cn from '@utils/classnames';
+
 import FileFinderForm from '@app/FileFinderForm';
 import FileFinderProduct from '@app/FileFinderProduct';
-import { products, productCategories, ProductI } from '@app/database';
-import styles from './FileFinder.css';
+import { ProductI, productCategories, products } from '@app/database';
 
-const FileFinder = ({ className = '' }: { className?: string }) => {
+import cn from '@utils/classnames';
+
+import styles from './FileFinder.module.css';
+
+const FileFinder: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [searchTerm, setSearchTerm] = React.useState<string>('');
-  const [checkedCategories, setCheckedCategories] = React.useState<
-    Array<string>
-  >(productCategories);
+  const [checkedCategories, setCheckedCategories] =
+    React.useState<Array<string>>(productCategories);
 
   const results = React.useMemo<Array<ProductI>>(
     () =>
       products.filter(
-        product =>
-          product.categories.some(item => checkedCategories.includes(item)) &&
+        (product) =>
+          product.categories.some((item) => checkedCategories.includes(item)) &&
           product.name.toLowerCase().includes(searchTerm.toLowerCase())
       ),
     [searchTerm, checkedCategories]
@@ -31,7 +33,7 @@ const FileFinder = ({ className = '' }: { className?: string }) => {
       />
       <h2 className={cn(styles.title, styles.titleProducts)}>Products</h2>
       <div className={styles.list}>
-        {results.map(product => (
+        {results.map((product) => (
           <FileFinderProduct className={styles.listItem} product={product} />
         ))}
       </div>

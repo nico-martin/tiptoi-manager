@@ -1,16 +1,10 @@
 import React from 'react';
-import cn from '@utils/classnames';
-import styles from './FieldSelect.css';
 
-const FieldSelect = ({
-  className = '',
-  value,
-  onChange,
-  name,
-  id,
-  options,
-  ...props
-}: {
+import cn from '@utils/classnames';
+
+import styles from './FieldSelect.module.css';
+
+const FieldSelect: React.FC<{
   className?: string;
   value: string;
   onChange: Function;
@@ -18,11 +12,11 @@ const FieldSelect = ({
   id: string;
   options: Record<string, { name: string; [key: string]: any }>;
   [key: string]: any;
-}) => (
+}> = ({ className = '', value, onChange, name, id, options, ...props }) => (
   <select
     className={cn(className, styles.root)}
     value={value}
-    onChange={e => onChange(e)}
+    onChange={(e) => onChange(e)}
     name={name}
     id={id}
     {...props}

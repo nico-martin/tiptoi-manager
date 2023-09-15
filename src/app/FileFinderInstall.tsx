@@ -1,17 +1,17 @@
+import { Button, ButtonGroup, ContentModal } from '@theme';
 import React from 'react';
-import { Button, ContentModal, ButtonGroup } from '@theme';
-import { writeFile } from '@utils/fileSystem';
+
 import { useDirHandle, usePenFiles } from '@app/FilesContext';
 import { ProductI } from '@app/database';
-import styles from './FileFinderInstall.css';
 
-const FileFinderInstall = ({
-  onClose,
-  product,
-}: {
+import { writeFile } from '@utils/fileSystem';
+
+import styles from './FileFinderInstall.module.css';
+
+const FileFinderInstall: React.FC<{
   onClose: () => void;
   product: ProductI;
-}) => {
+}> = ({ onClose, product }) => {
   const [dirHandle] = useDirHandle();
   const { reloadFiles } = usePenFiles();
   const [pending, setPending] = React.useState<boolean>(false);
@@ -43,9 +43,9 @@ const FileFinderInstall = ({
   const downloadFile = () => {
     setPending(true);
     fetch(`https://cors.nico.dev/?url=${encodeURI(gameFile.url)}&mode=native`)
-      .then(res => res.toString())
-      .then(str => setDownloaded(str))
-      .catch(e => {
+      .then((res) => res.toString())
+      .then((str) => setDownloaded(str))
+      .catch((e) => {
         console.error(e);
         alert('File could not be downloaded');
       })
@@ -74,7 +74,7 @@ const FileFinderInstall = ({
             <ButtonGroup align="center">
               <Button
                 onClick={() => write()}
-                icon="mdi/save"
+                icon="save"
                 loading={pending}
                 disabled={downloaded === ''}
               >

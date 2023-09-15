@@ -1,14 +1,28 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "module": "commonjs",
-    "target": "es5",
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "esModuleInterop": true,
-    "baseUrl": "./",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": false,
+    "baseUrl": "./",
     "paths": {
       "@app/*": [
         "src/app/*"
@@ -18,34 +32,20 @@
       ],
       "@theme": [
         "src/theme/index.ts"
-      ],
-      "@store/*": [
-        "src/store/*"
-      ],
-      "@types/*": [
-        "src/@types/*"
-      ],
-      "react": [
-        "node_modules/preact/compat"
-      ],
-      "react-dom": [
-        "node_modules/preact/compat"
       ]
     },
     "typeRoots": [
       "node_modules/@types",
       "src/@types"
-    ],
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
     ]
   },
   "include": [
-    "./**/*.tsx",
-    "./**/*.ts",
-    "./**/*.d.ts",
-    "./**/*.css"
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }
+

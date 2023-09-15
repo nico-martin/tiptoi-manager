@@ -1,17 +1,11 @@
 import React from 'react';
-import cn from '@utils/classnames';
-import { Loader, ShadowBox } from '../index';
-import styles from './ContentModal.css';
 
-const ContentModal = ({
-  title,
-  children,
-  onClose,
-  className = '',
-  loading = false,
-  full = true,
-  preventClose = false,
-}: {
+import cn from '@utils/classnames';
+
+import { Loader, ShadowBox } from '../index';
+import styles from './ContentModal.module.css';
+
+const ContentModal: React.FC<{
   title: string;
   children?: React.JSX.Element | React.JSX.Element[] | string;
   onClose: Function;
@@ -19,6 +13,14 @@ const ContentModal = ({
   loading?: boolean;
   full?: boolean;
   preventClose?: boolean;
+}> = ({
+  title,
+  children,
+  onClose,
+  className = '',
+  loading = false,
+  full = true,
+  preventClose = false,
 }) => (
   <React.Fragment>
     <ShadowBox
