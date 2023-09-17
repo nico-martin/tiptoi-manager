@@ -1,11 +1,11 @@
 import { Button, Tooltip } from '@theme';
 import React from 'react';
 
-import FileFinderInstall from '@app/FileFinderInstall';
-import { useDirHandle, usePenFiles } from '@app/FilesContext';
-import { ProductI } from '@app/database';
+import FileFinderInstall from '@app/FileFinder/FileFinderInstall.tsx';
+import { useDirHandle, usePenFiles } from '@app/FilesContext.tsx';
+import { ProductI } from '@app/catalog/types.ts';
 
-import cn from '@utils/classnames';
+import cn from '@utils/classnames.ts';
 
 import styles from './FileFinderProduct.module.css';
 

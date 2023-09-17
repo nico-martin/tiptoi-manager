@@ -21,7 +21,6 @@ const ShadowBox: React.FC<{
   preventClose,
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
-  const [shadow, setShadow] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setShow(true);
@@ -49,11 +48,7 @@ const ShadowBox: React.FC<{
     >
       <div className={styles.shadow} onClick={onClose} />
       <article className={styles.box}>
-        <header
-          className={cn(styles.header, {
-            [styles.headerShadow]: shadow,
-          })}
-        >
+        <header className={cn(styles.header)}>
           {title !== null && <h1 className={styles.title}>{title}</h1>}{' '}
           {!preventClose && (
             <CloseButton className={styles.close} onClick={onClose} />

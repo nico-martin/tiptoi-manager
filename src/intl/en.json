@@ -1,0 +1,17 @@
+{
+  "_error": "An unexpected error occured",
+  "directory.picker.connect": "connect pen",
+  "directory.picker.error.dir": "The selected directory is not a Tiptoi pen.",
+  "filter.title": "Searchfilter",
+  "filter.search.placeholder": "search..",
+  "filter.search.categories.title": "Categories",
+  "filter.search.categories.all": "Alle",
+  "language": "Language",
+  "pen.title": "Audio Files on your pen:",
+  "pen.file.delete": "Delete file",
+  "pen.file.delete.confirm": "Are you sure you want to delete the following file?",
+  "pen.file.delete.confirmed": "Yes, delete file",
+  "pen.file.delete.action": "delete",
+  "products.title": "Products",
+  "support.warning": "This app uses the \"file access API\", an experimental browser API that is currently only supported in the desktop versions of Chrome, Edge and Opera"
+}

@@ -1,0 +1,17 @@
+{
+  "_error": "Une erreur inattendue s'est produite",
+  "directory.picker.connect": "connecter le stylo",
+  "directory.picker.error.dir": "Le répertoire sélectionné n'est pas un stylo Tiptoi.",
+  "filter.title": "Filtre de recherche",
+  "filter.search.placeholder": "search..",
+  "filter.search.categories.title": "Categories",
+  "filter.search.categories.all": "Tous",
+  "language": "Langue",
+  "pen.title": "Fichiers audio sur votre stylo:",
+  "pen.file.delete": "Supprimer le fichier",
+  "pen.file.delete.confirm": "Êtes-vous sûr de vouloir supprimer le fichier suivant?",
+  "pen.file.delete.confirmed": "Oui, supprimer le fichier",
+  "pen.file.delete.action": "supprimer",
+  "products.title": "Produits",
+  "support.warning": "Cette application utilise l'\"File Access API\", une API de navigateur expérimentale qui n'est actuellement prise en charge que dans les versions de bureau de Chrome, Edge et Opera."
+}

@@ -42,16 +42,17 @@ export const usePenFiles = (): {
   return {
     files,
     reloadFiles: () => {
-      getDirectoryEntries(dirHandle).then((entries) => {
-        const gmeFiles = entries.filter(
-          (entry) =>
-            entry.kind === 'file' &&
-            entry.name.split('.').pop() === 'gme' &&
-            entry.name !== 'Stickerbogen_Starterset.gme' &&
-            entry.name !== 'Schnellstart-Anleitung.gme'
-        ) as Array<FileSystemFileHandle>;
-        setFiles(gmeFiles);
-      });
+      dirHandle &&
+        getDirectoryEntries(dirHandle).then((entries) => {
+          const gmeFiles = entries.filter(
+            (entry) =>
+              entry.kind === 'file' &&
+              entry.name.split('.').pop() === 'gme' &&
+              entry.name !== 'Stickerbogen_Starterset.gme' &&
+              entry.name !== 'Schnellstart-Anleitung.gme'
+          ) as Array<FileSystemFileHandle>;
+          setFiles(gmeFiles);
+        });
     },
   };
 };

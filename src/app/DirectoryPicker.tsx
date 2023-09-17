@@ -1,5 +1,6 @@
 import { Button, Notification } from '@theme';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import { useDirHandle } from '@app/FilesContext';
 
@@ -9,7 +10,7 @@ import styles from './DirectoryPicker.module.css';
 
 const DirectoryPicker: React.FC = () => {
   const [, setDirHandle] = useDirHandle();
-
+  const { formatMessage } = useIntl();
   const [pendig, setPending] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>('');
 
@@ -35,7 +36,9 @@ const DirectoryPicker: React.FC = () => {
                   );
 
                   if (!icoFile) {
-                    setError('The selected directory is not a Tiptoi pen.');
+                    setError(
+                      formatMessage({ id: 'directory.picker.error.dir' })
+                    );
                   } else {
                     setDirHandle(handle);
                   }
@@ -43,14 +46,14 @@ const DirectoryPicker: React.FC = () => {
               );
             })
             .catch((e) => {
-              setError('An unexpected error occured');
+              setError(formatMessage({ id: '_error' }));
               console.error(e);
             })
             .finally(() => setPending(false));
         }}
         disabled={pendig}
       >
-        connect pen
+        {formatMessage({ id: 'directory.picker.connect' })}
       </Button>
     </div>
   );

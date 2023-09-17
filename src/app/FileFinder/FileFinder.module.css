@@ -17,3 +17,16 @@
 
 .listItem {
 }
+
+.loaderContainer {
+  text-align: center;
+  margin-top: 15vh;
+}
+
+.loader {
+  font-size: 2rem;
+}
+
+.error {
+  margin-top: var(--space-grid-big);
+}

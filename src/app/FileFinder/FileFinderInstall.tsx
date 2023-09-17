@@ -1,10 +1,10 @@
 import { Button, ButtonGroup, ContentModal } from '@theme';
 import React from 'react';
 
-import { useDirHandle, usePenFiles } from '@app/FilesContext';
-import { ProductI } from '@app/database';
+import { useDirHandle, usePenFiles } from '@app/FilesContext.tsx';
+import { ProductI } from '@app/catalog/types.ts';
 
-import { writeFile } from '@utils/fileSystem';
+import { writeFile } from '@utils/fileSystem.ts';
 
 import styles from './FileFinderInstall.module.css';
 
