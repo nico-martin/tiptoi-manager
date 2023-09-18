@@ -3,7 +3,9 @@ import React from 'react';
 
 import { useDirHandle, usePenFiles } from '@app/FilesContext.tsx';
 import { ProductI } from '@app/catalog/types.ts';
+import { useGmeFileStore } from '@app/storage/StorageContext.tsx';
 
+import { API_BASE } from '@utils/api/constants.ts';
 import { writeFile } from '@utils/fileSystem.ts';
 
 import styles from './FileFinderInstall.module.css';
@@ -17,11 +19,13 @@ const FileFinderInstall: React.FC<{
   const [pending, setPending] = React.useState<boolean>(false);
   const [done, setDone] = React.useState<boolean>(false);
   const [downloaded, setDownloaded] = React.useState<string>('');
-
-  const gameFile = React.useMemo(
-    () => (product.gameFiles.length >= 1 ? product.gameFiles[0] : null),
-    [product.gameFiles]
-  );
+  const { setFile } = useGmeFileStore();
+  const gameFile = React.useMemo(() => {
+    const files = product.gameFiles.sort((a, b) =>
+      a.version > b.version ? -1 : 1
+    );
+    return files.length >= 1 ? files[0] : null;
+  }, [product.gameFiles]);
 
   React.useEffect(() => {
     gameFile?.url && !pending && downloadFile();
@@ -40,16 +44,29 @@ const FileFinderInstall: React.FC<{
       .finally(() => setPending(false));
   };
 
-  const downloadFile = () => {
+  const downloadFile = async () => {
     setPending(true);
-    fetch(`https://cors.nico.dev/?url=${encodeURI(gameFile.url)}&mode=native`)
-      .then((res) => res.toString())
-      .then((str) => setDownloaded(str))
-      .catch((e) => {
-        console.error(e);
-        alert('File could not be downloaded');
-      })
-      .finally(() => setPending(false));
+    try {
+      const res = await fetch(
+        `${API_BASE}api/getFile.php?url=${encodeURI(gameFile.url)}`
+      );
+      const text = await res.text();
+      await setFile(product.id, {
+        name: product.name,
+        images: product.images,
+        audioFile: {
+          fileName: gameFile.fileName,
+          fileContent: text,
+          url: gameFile.url,
+          version: gameFile.version,
+        },
+      });
+      setDownloaded(text);
+    } catch (e) {
+      console.log(e);
+      alert('File could not be downloaded');
+    }
+    setPending(false);
   };
 
   return (

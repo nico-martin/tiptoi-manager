@@ -1,8 +1,14 @@
-import { Button, Tooltip } from '@theme';
+import {
+  Button,
+  /* Tooltip*/
+} from '@theme';
 import React from 'react';
 
 import FileFinderInstall from '@app/FileFinder/FileFinderInstall.tsx';
-import { useDirHandle, usePenFiles } from '@app/FilesContext.tsx';
+import {
+  /*useDirHandle,*/
+  usePenFiles,
+} from '@app/FilesContext.tsx';
 import { ProductI } from '@app/catalog/types.ts';
 
 import cn from '@utils/classnames.ts';
@@ -15,7 +21,7 @@ const FileFinderProduct: React.FC<{
 }> = ({ className = '', product }) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const { files } = usePenFiles();
-  const [dirHandle] = useDirHandle();
+  ////const [dirHandle] = useDirHandle();
   const tooltipRef = React.useRef<HTMLSpanElement>(null);
 
   const gameFile = React.useMemo(
@@ -53,18 +59,18 @@ const FileFinderProduct: React.FC<{
         />
       )}
       <p className={styles.title}>{product.name}</p>
-      {!dirHandle && (
+      {/*!dirHandle && (
         <Tooltip tooltipRef={tooltipRef} maxWidth={200}>
           Please connect your pen to download files.
         </Tooltip>
-      )}
+      )*/}
       {gameFile && (
         <span ref={tooltipRef} className={styles.download}>
           <Button
             icon="download"
             size="small"
             onClick={() => setShowModal(true)}
-            disabled={alreadyInstalled || !dirHandle}
+            disabled={alreadyInstalled}
           >
             {alreadyInstalled ? 'Installed' : 'Download'}
           </Button>

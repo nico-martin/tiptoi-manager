@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useStorageContext } from '@app/storage/StorageContext.tsx';
+import { useLocalStorage } from '@app/storage/StorageContext.tsx';
 
 import { apiGet } from '@utils/api/apiFetch.ts';
 import { API_BASE } from '@utils/api/constants.ts';
@@ -34,24 +34,28 @@ export const CatalogContextProvider: React.FC<{
   const { language } = useIntlContext();
   const [catalog, setCatalog] = React.useState<Catalog>(null);
   const [state, setState] = React.useState<STATE>(STATE.IDLE);
-  const { getItem, setItem } = useStorageContext();
+
+  const { setLocalItem, getLocalItem } = useLocalStorage();
 
   const languageISO = React.useMemo(() => getLanguageISO(language), [language]);
-  const loadCatalog = (languageISO: string) => {
+  const loadCatalog = async (languageISO: string) => {
     setState(STATE.LOADING);
-    const stored = getItem(`catalog-${languageISO}`);
-    if (stored) {
-      setCatalog(JSON.parse(stored));
-      setState(STATE.SUCCESS);
-      return;
-    }
-    apiGet<Catalog>(`${API_BASE}api/getCatalog.php?language=${languageISO}`)
-      .then(async (catalog) => {
-        await setItem(`catalog-${languageISO}`, JSON.stringify(catalog));
-        setCatalog(catalog);
+    try {
+      const stored = await getLocalItem(`catalog-${languageISO}`);
+      if (stored) {
+        setCatalog(JSON.parse(stored));
         setState(STATE.SUCCESS);
-      })
-      .catch(() => setState(STATE.ERROR));
+        return;
+      }
+      const catalog = await apiGet<Catalog>(
+        `${API_BASE}api/getCatalog.php?language=${languageISO}`
+      );
+      await setLocalItem(`catalog-${languageISO}`, JSON.stringify(catalog));
+      setCatalog(catalog);
+      setState(STATE.SUCCESS);
+    } catch (e) {
+      setState(STATE.ERROR);
+    }
   };
 
   const products: Array<ProductI> = React.useMemo(

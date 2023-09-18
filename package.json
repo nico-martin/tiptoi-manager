@@ -19,6 +19,7 @@
     "@popperjs/core": "^2.11.8",
     "@types/wicg-file-system-access": "^2020.9.6",
     "cookies-ts": "^1.0.5",
+    "idb": "^7.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^6.4.6",

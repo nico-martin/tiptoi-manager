@@ -1,5 +1,10 @@
 <?php
 
+$allowedOrigins = [
+    'https://localhost:4541',
+    'https://tiptoi-manager.nico.dev',
+];
+
 function getToken()
 {
     $curl = curl_init();
@@ -49,7 +54,12 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 
 curl_close($curl);
-header("Access-Control-Allow-Origin: https://localhost:4541");
+
+$origin = $_SERVER['HTTP_ORIGIN'];
+
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+}
 header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, content-type");
 header("Content-Type: application/json");

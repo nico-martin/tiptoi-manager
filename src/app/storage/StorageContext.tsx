@@ -1,17 +1,40 @@
 import React from 'react';
 
-const StorageContext = React.createContext<{
+import {
+  SavedProduct,
+  get as getGme,
+  getKeys as getGmeKeys,
+  set as setGme,
+} from '@app/storage/gmeFilesDB.ts';
+
+interface Space {
   totalSpace: number;
   availableSpace: number;
   persisted: boolean;
-  setItem: (key: string, value: string) => Promise<void>;
-  getItem: (key: string) => string;
-}>({
+}
+
+interface Files {
+  fileKeys: Array<string>;
+  getFile: (key: string) => Promise<SavedProduct>;
+  setFile: (key: string, file: SavedProduct) => Promise<void>;
+}
+
+interface LocalStorage {
+  setLocalItem: (key: string, value: string) => Promise<void>;
+  getLocalItem: (key: string) => string;
+}
+
+interface Context extends Files, LocalStorage, Space {}
+
+const StorageContext = React.createContext<Context>({
   totalSpace: 0,
   availableSpace: 0,
   persisted: false,
-  setItem: () => new Promise((resolve) => resolve()),
-  getItem: () => '',
+  setLocalItem: () => new Promise((resolve) => resolve()),
+  getLocalItem: () => '',
+  fileKeys: [],
+  getFile: () => new Promise((resolve) => resolve(null)),
+  setFile: () => new Promise((resolve) => resolve()),
 });
 
 export const StorageContextProvider: React.FC<{
@@ -20,6 +43,12 @@ export const StorageContextProvider: React.FC<{
   const [persisted, setPersisted] = React.useState<boolean>(false);
   const [totalSpace, setTotalSpace] = React.useState<number>(0);
   const [availableSpace, setAvailableSpace] = React.useState<number>(0);
+  const [fileKeys, setFileKeys] = React.useState<Array<string>>([]);
+
+  React.useEffect(() => {
+    checkSpace();
+    getGmeKeys().then((keys) => setFileKeys(keys));
+  }, []);
 
   const persist: () => Promise<void> = () =>
     navigator.storage
@@ -34,28 +63,59 @@ export const StorageContextProvider: React.FC<{
     navigator.storage.estimate().then((estimate) => {
       setTotalSpace(estimate.quota);
       setAvailableSpace(estimate.usage);
-      /*
-      console.log((estimate.usage / estimate.quota) * 100 + '%);
+      console.log((estimate.usage / estimate.quota) * 100 + '%');
       console.log((estimate.quota / 1024 / 1024).toFixed(2) + ' MB');
-       */
     });
 
-  const setItem = async (key: string, value: string) => {
+  const setLocalItem = async (key: string, value: string) => {
     !persisted && (await persist());
-    window.sessionStorage.setItem(key, value);
+    window.localStorage.setItem(key, value);
     await checkSpace();
   };
 
-  const getItem = (key: string): string =>
-    window.sessionStorage.getItem(key) || null;
+  const getLocalItem = (key: string): string =>
+    window.localStorage.getItem(key) || null;
+
+  const getFile = (key: string) => getGme(key);
+
+  const setFile = async (key: string, value: SavedProduct) => {
+    !persisted && (await persist());
+    await setGme(key, value);
+    await checkSpace();
+    getGmeKeys().then((keys) => setFileKeys(keys));
+  };
 
   return (
     <StorageContext.Provider
-      value={{ totalSpace, availableSpace, persisted, setItem, getItem }}
+      value={{
+        totalSpace,
+        availableSpace,
+        persisted,
+        setLocalItem,
+        getLocalItem,
+        fileKeys,
+        getFile,
+        setFile,
+      }}
     >
       {children}
     </StorageContext.Provider>
   );
 };
 
-export const useStorageContext = () => React.useContext(StorageContext);
+export const useGmeFileStore = (): Files => {
+  const { fileKeys, getFile, setFile } = React.useContext(StorageContext);
+  return { fileKeys, getFile, setFile };
+};
+
+export const usePersistedSpace = (): Space => {
+  const { availableSpace, totalSpace, persisted } =
+    React.useContext(StorageContext);
+
+  return { availableSpace, totalSpace, persisted };
+};
+
+export const useLocalStorage = (): LocalStorage => {
+  const { setLocalItem, getLocalItem } = React.useContext(StorageContext);
+  return { setLocalItem, getLocalItem };
+};
