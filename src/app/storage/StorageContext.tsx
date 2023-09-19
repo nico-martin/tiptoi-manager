@@ -9,8 +9,9 @@ import {
 
 interface Space {
   totalSpace: number;
-  availableSpace: number;
+  usedSpace: number;
   persisted: boolean;
+  persist: () => Promise<void>;
 }
 
 interface Files {
@@ -28,8 +29,9 @@ interface Context extends Files, LocalStorage, Space {}
 
 const StorageContext = React.createContext<Context>({
   totalSpace: 0,
-  availableSpace: 0,
+  usedSpace: 0,
   persisted: false,
+  persist: () => new Promise((resolve) => resolve()),
   setLocalItem: () => new Promise((resolve) => resolve()),
   getLocalItem: () => '',
   fileKeys: [],
@@ -42,12 +44,13 @@ export const StorageContextProvider: React.FC<{
 }> = ({ children }) => {
   const [persisted, setPersisted] = React.useState<boolean>(false);
   const [totalSpace, setTotalSpace] = React.useState<number>(0);
-  const [availableSpace, setAvailableSpace] = React.useState<number>(0);
+  const [usedSpace, setUsedSpace] = React.useState<number>(0);
   const [fileKeys, setFileKeys] = React.useState<Array<string>>([]);
 
   React.useEffect(() => {
     checkSpace();
     getGmeKeys().then((keys) => setFileKeys(keys));
+    navigator.storage.persisted().then((persisted) => setPersisted(persisted));
   }, []);
 
   const persist: () => Promise<void> = () =>
@@ -62,9 +65,7 @@ export const StorageContextProvider: React.FC<{
   const checkSpace: () => Promise<void> = () =>
     navigator.storage.estimate().then((estimate) => {
       setTotalSpace(estimate.quota);
-      setAvailableSpace(estimate.usage);
-      console.log((estimate.usage / estimate.quota) * 100 + '%');
-      console.log((estimate.quota / 1024 / 1024).toFixed(2) + ' MB');
+      setUsedSpace(estimate.usage);
     });
 
   const setLocalItem = async (key: string, value: string) => {
@@ -89,8 +90,9 @@ export const StorageContextProvider: React.FC<{
     <StorageContext.Provider
       value={{
         totalSpace,
-        availableSpace,
+        usedSpace,
         persisted,
+        persist,
         setLocalItem,
         getLocalItem,
         fileKeys,
@@ -109,10 +111,10 @@ export const useGmeFileStore = (): Files => {
 };
 
 export const usePersistedSpace = (): Space => {
-  const { availableSpace, totalSpace, persisted } =
+  const { usedSpace, totalSpace, persisted, persist } =
     React.useContext(StorageContext);
 
-  return { availableSpace, totalSpace, persisted };
+  return { usedSpace, totalSpace, persisted, persist };
 };
 
 export const useLocalStorage = (): LocalStorage => {

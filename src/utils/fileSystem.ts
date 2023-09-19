@@ -26,7 +26,7 @@ export const getDirectoryEntries = (
 export const writeFile = (
   dirHandle: FileSystemDirectoryHandle,
   name: string,
-  content: string
+  content: string | Blob
 ): Promise<FileSystemFileHandle> =>
   new Promise(async (resolve, reject) => {
     try {

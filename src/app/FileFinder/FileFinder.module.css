@@ -3,6 +3,7 @@
 
 .title {
   margin-bottom: var(--space-grid-half);
+  margin-top: var(--space-grid-half);
 }
 
 .titleProducts {

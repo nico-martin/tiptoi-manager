@@ -45,7 +45,7 @@ const Button: React.FC<{
     })}
     onClick={() => onClick()}
   >
-    <div className={styles.bkg} />
+    <span className={styles.bkg} />
     <Loader className={styles.loader} />
     {Boolean(icon) && !iconRight && (
       <Icon className={cn(styles.icon, styles.iconLeft)} icon={icon} />

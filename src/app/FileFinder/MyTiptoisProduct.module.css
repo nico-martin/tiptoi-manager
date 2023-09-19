@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  object-fit: contain;
+  aspect-ratio: 5/4;
+  width: 100%;
+  border: 1px solid var(--c-border-light);
+}
+
+.title {
+  margin: var(--space-s) 0;
+}
+
+.installWrapper {
+  display: inline-block;
+  text-align: center;
+  margin-top: auto;
+}
+
+.install {
+  align-self: center;
+  display: inline-block;
+}

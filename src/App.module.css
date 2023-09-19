@@ -26,7 +26,7 @@
 .pen {
   padding-top: var(--space-grid);
   margin: 0 var(--space-grid);
-  flex: 0 1 30vw;
+  flex: 1 1 30vw;
   height: 100%;
 }
 
@@ -34,7 +34,7 @@
   padding-top: var(--space-grid);
   margin: 0 var(--space-grid);
   height: 100%;
-  flex-grow: 1;
+  flex: 1 1 70vw;
 }
 
 .pen,
@@ -42,6 +42,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -63,4 +65,26 @@
       background-color: var(--c-border-dark);
     }
   }
+}
+
+.nav {
+  display: flex;
+  margin-bottom: var(--space-grid);
+}
+
+.navElement {
+  font-size: 1.5rem;
+  padding: 0;
+
+  & + .navElement {
+    margin-left: 1em;
+  }
+}
+
+.navElementActive {
+  font-weight: 999;
+}
+
+.mytiptois {
+  flex-grow: 1;
 }

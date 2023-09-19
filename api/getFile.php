@@ -37,7 +37,7 @@ if (in_array($origin, $allowedOrigins)) {
 
 // Set the appropriate HTTP headers to indicate a file download
 header('Content-Type: application/octet-stream');
-//header('Content-Disposition: attachment; filename="' . $fileName . '"');
+header('Content-Disposition: attachment; filename="' . $fileName . '"');
 
 // Output the file contents
 echo $fileContents;

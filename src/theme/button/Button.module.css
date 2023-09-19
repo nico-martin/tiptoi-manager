@@ -56,6 +56,7 @@
 
 .bkg {
   position: absolute;
+  display: block;
   inset: 0;
   background-color: currentColor;
   opacity: 0.8;
@@ -86,6 +87,7 @@
 .iconRight {
   left: auto;
   right: 0;
+  margin-left: 0;
   margin-right: 0.4em;
 }
 
@@ -132,11 +134,24 @@
 }
 
 .layoutGhost {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0;
+  display: inline-block;
 
   --button-color: transparent;
   --button-text-color: var(--c-orange);
+
+  .icon {
+    color: var(--button-text-color);
+    margin: 0 !important;
+  }
+
+  &:has(.iconLeft) {
+    padding-left: 1.8em;
+  }
+
+  &:has(.iconRight) {
+    padding-right: 1.8em;
+  }
 
   &.colorBlack {
     --button-color: transparent;

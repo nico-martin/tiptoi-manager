@@ -17,7 +17,7 @@ const Pen: React.FC<{ className?: string }> = ({ className = '' }) => {
 
   React.useEffect(() => {
     reloadFiles();
-  }, []);
+  }, [dirHandle]);
 
   return (
     <div className={cn(className, styles.root)}>

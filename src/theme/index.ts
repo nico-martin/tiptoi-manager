@@ -10,6 +10,8 @@ export { default as Loader } from './Loader/Loader';
 export { default as ContentModal } from './ContentModal/ContentModal';
 export { default as Notification } from './misc/Notification';
 export { default as Tooltip } from './misc/Tooltip';
+export { default as Badge } from './misc/Badge';
+export { default as ProgressBar } from './misc/ProgressBar';
 export { default as FieldSelect } from './Form/FieldSelect';
 export { default as FieldInput } from './Form/FieldInput';
 export { default as FieldRadio } from './Form/FieldRadio';

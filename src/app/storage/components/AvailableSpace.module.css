@@ -1,0 +1,30 @@
+.root {
+  padding-bottom: var(--space-grid-half);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  font-size: var(--fs-small);
+
+  svg {
+    color: var(--c-orange);
+  }
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progressBarContainer {
+  margin-top: var(--space-grid);
+  padding-top: var(--space-grid);
+  border-top: 1px solid var(--c-border-light);
+}
+
+.progressBarText {
+  margin-top: var(--space-grid-half);
+  font-size: var(--fs-small);
+}

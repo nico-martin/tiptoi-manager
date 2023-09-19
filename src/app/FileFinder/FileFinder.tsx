@@ -11,6 +11,7 @@ import {
 import { ProductI } from '@app/catalog/types.ts';
 
 import cn from '@utils/classnames.ts';
+import useOnline from '@utils/useOnline.ts';
 
 import styles from './FileFinder.module.css';
 
@@ -19,6 +20,7 @@ const FileFinder: React.FC<{ className?: string }> = ({ className = '' }) => {
   const { state, products, productCategories } = useCatalog();
   const [checkedCategories, setCheckedCategories] =
     React.useState<Array<string>>(productCategories);
+  const online = useOnline();
 
   React.useEffect(() => {
     setCheckedCategories(productCategories);
@@ -38,33 +40,43 @@ const FileFinder: React.FC<{ className?: string }> = ({ className = '' }) => {
 
   return (
     <div className={cn(className, styles.root)}>
-      <h2 className={styles.title}>{formatMessage({ id: 'filter.title' })}</h2>
-      <FileFinderForm
-        setSearchTerm={setSearchTerm}
-        checkedCategories={checkedCategories}
-        setCheckedCategories={setCheckedCategories}
-      />
-      <h2 className={cn(styles.title, styles.titleProducts)}>
-        {formatMessage({ id: 'products.title' })}
-      </h2>
-      {state === CATALOG_STATE.LOADING || state === CATALOG_STATE.IDLE ? (
-        <div className={styles.loaderContainer}>
-          <Loader className={styles.loader} />
-        </div>
-      ) : state === CATALOG_STATE.ERROR ? (
-        <Notification type="error" className={styles.error}>
-          {formatMessage({ id: '_error' })}
-        </Notification>
+      {online ? (
+        <React.Fragment>
+          <h2 className={styles.title}>
+            {formatMessage({ id: 'filter.title' })}
+          </h2>
+          <FileFinderForm
+            setSearchTerm={setSearchTerm}
+            checkedCategories={checkedCategories}
+            setCheckedCategories={setCheckedCategories}
+          />
+          <h2 className={cn(styles.title, styles.titleProducts)}>
+            {formatMessage({ id: 'products.title' })}
+          </h2>
+          {state === CATALOG_STATE.LOADING || state === CATALOG_STATE.IDLE ? (
+            <div className={styles.loaderContainer}>
+              <Loader className={styles.loader} />
+            </div>
+          ) : state === CATALOG_STATE.ERROR ? (
+            <Notification type="error" className={styles.error}>
+              {formatMessage({ id: '_error' })}
+            </Notification>
+          ) : (
+            <div className={styles.list}>
+              {results.map((product) => (
+                <FileFinderProduct
+                  className={styles.listItem}
+                  product={product}
+                  key={product.id}
+                />
+              ))}
+            </div>
+          )}
+        </React.Fragment>
       ) : (
-        <div className={styles.list}>
-          {results.map((product) => (
-            <FileFinderProduct
-              className={styles.listItem}
-              product={product}
-              key={product.id}
-            />
-          ))}
-        </div>
+        <Notification type="message">
+          {formatMessage({ id: 'products.offline' })}
+        </Notification>
       )}
     </div>
   );

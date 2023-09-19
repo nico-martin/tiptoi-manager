@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, ContentModal } from '@theme';
+import { Button, ButtonGroup, ContentModal, Tooltip } from '@theme';
 import React from 'react';
 
 import { useDirHandle, usePenFiles } from '@app/FilesContext.tsx';
@@ -7,6 +7,7 @@ import { useGmeFileStore } from '@app/storage/StorageContext.tsx';
 
 import { API_BASE } from '@utils/api/constants.ts';
 import { writeFile } from '@utils/fileSystem.ts';
+import { blobToString } from '@utils/functions.ts';
 
 import styles from './FileFinderInstall.module.css';
 
@@ -18,7 +19,7 @@ const FileFinderInstall: React.FC<{
   const { reloadFiles } = usePenFiles();
   const [pending, setPending] = React.useState<boolean>(false);
   const [done, setDone] = React.useState<boolean>(false);
-  const [downloaded, setDownloaded] = React.useState<string>('');
+  const [downloaded, setDownloaded] = React.useState<Blob>(null);
   const { setFile } = useGmeFileStore();
   const gameFile = React.useMemo(() => {
     const files = product.gameFiles.sort((a, b) =>
@@ -26,6 +27,7 @@ const FileFinderInstall: React.FC<{
     );
     return files.length >= 1 ? files[0] : null;
   }, [product.gameFiles]);
+  const tooltipRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
     gameFile?.url && !pending && downloadFile();
@@ -50,7 +52,8 @@ const FileFinderInstall: React.FC<{
       const res = await fetch(
         `${API_BASE}api/getFile.php?url=${encodeURI(gameFile.url)}`
       );
-      const text = await res.text();
+      const blob = await res.blob();
+      const text = await blobToString(blob);
       await setFile(product.id, {
         name: product.name,
         images: product.images,
@@ -61,7 +64,7 @@ const FileFinderInstall: React.FC<{
           version: gameFile.version,
         },
       });
-      setDownloaded(text);
+      setDownloaded(blob);
     } catch (e) {
       console.log(e);
       alert('File could not be downloaded');
@@ -89,14 +92,24 @@ const FileFinderInstall: React.FC<{
               After that you will be abe to install it.
             </p>
             <ButtonGroup align="center">
-              <Button
-                onClick={() => write()}
-                icon="save"
-                loading={pending}
-                disabled={downloaded === ''}
+              {!dirHandle && (
+                <Tooltip tooltipRef={tooltipRef} maxWidth={300}>
+                  Please connect your pen to install files.
+                </Tooltip>
+              )}
+              <span
+                ref={tooltipRef}
+                style={{ display: 'inline-block', marginBottom: '1rem' }}
               >
-                Install
-              </Button>
+                <Button
+                  onClick={() => write()}
+                  icon="save"
+                  loading={pending}
+                  disabled={!Boolean(downloaded) || !Boolean(dirHandle)}
+                >
+                  Install
+                </Button>
+              </span>
             </ButtonGroup>
           </React.Fragment>
         )}

@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list {
+  display: grid;
+  grid: auto / repeat(4, 1fr);
+  grid-gap: var(--space-grid);
+}
+
+.listItem {
+}
+
+.space {
+  margin-top: auto;
+}

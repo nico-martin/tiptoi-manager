@@ -1,6 +1,8 @@
 import { ProductImageI } from '@app/catalog/types.ts';
 import { IDB_STORE_FILES } from '@app/storage/constants.ts';
 
+import { base64Content, mimeType } from '@utils/functions.ts';
+
 import { dbPromise } from './db.ts';
 
 export interface SavedProduct {
@@ -8,7 +10,7 @@ export interface SavedProduct {
   images: Array<ProductImageI>;
   audioFile: {
     fileName: string;
-    fileContent: string;
+    fileContent: [base64Content, mimeType];
     url: string;
     version: string;
   };

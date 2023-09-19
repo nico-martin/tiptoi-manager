@@ -38,6 +38,7 @@ export const CatalogContextProvider: React.FC<{
   const { setLocalItem, getLocalItem } = useLocalStorage();
 
   const languageISO = React.useMemo(() => getLanguageISO(language), [language]);
+
   const loadCatalog = async (languageISO: string) => {
     setState(STATE.LOADING);
     try {

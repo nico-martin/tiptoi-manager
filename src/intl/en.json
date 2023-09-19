@@ -1,5 +1,7 @@
 {
   "_error": "An unexpected error occured",
+  "app.nav.catalog": "Catalog",
+  "app.nav.my": "My Tiptois",
   "directory.picker.connect": "connect pen",
   "directory.picker.error.dir": "The selected directory is not a Tiptoi pen.",
   "filter.title": "Searchfilter",
@@ -13,5 +15,12 @@
   "pen.file.delete.confirmed": "Yes, delete file",
   "pen.file.delete.action": "delete",
   "products.title": "Products",
+  "products.offline": "You are offline At the moment only files under \"My Tiptois\" can be installed",
+  "storage.title": "Storage",
+  "storage.persist": "persist",
+  "storage.status": "Status: {status}",
+  "storage.available": "{absolute} ({relative}) available",
+  "storage.filesSaved": "{filesCount} file saved for offline usage",
+  "storage.filesSaved.plural": "{filesCount} files saved for offline usage",
   "support.warning": "This app uses the \"file access API\", an experimental browser API that is currently only supported in the desktop versions of Chrome, Edge and Opera"
 }

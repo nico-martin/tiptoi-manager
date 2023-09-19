@@ -1,0 +1,31 @@
+.root {
+  --badge-color: var(--c-feedback);
+
+  border: 1px solid var(--badge-color);
+  color: var(--badge-color);
+
+  border-radius: 50px;
+  position: relative;
+
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  display: inline-block;
+
+  &:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--badge-color);
+    opacity: 0.1;
+    border-radius: 50px;
+    z-index: 1;
+  }
+}
+
+.success {
+  --badge-color: var(--c-feedback-success);
+}
+
+.error {
+  --badge-color: var(--c-feedback-error);
+}
