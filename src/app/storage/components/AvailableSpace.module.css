@@ -1,5 +1,4 @@
 .root {
-  padding-bottom: var(--space-grid-half);
   display: flex;
   justify-content: flex-end;
 }

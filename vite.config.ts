@@ -91,10 +91,10 @@ export default defineConfig({
           name: 'description',
           content: app.description,
         },
-        {
+        /*{
           name: 'og:image',
           content: '/facebook.jpg',
-        },
+        },*/
         {
           name: 'og:title',
           content: app.title,
@@ -131,10 +131,10 @@ export default defineConfig({
           name: 'twitter:image',
           content: 'en_US',
         },
-        {
+        /*{
           name: 'twitter:type',
           content: '/twitter.jpg',
-        },
+        },*/
       ],
     }),
   ],

@@ -15,4 +15,6 @@
 
 .space {
   margin-top: auto;
+  padding-top: var(--space-grid);
+  padding-right: var(--space-grid-half);
 }

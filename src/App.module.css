@@ -32,6 +32,7 @@
 
 .filefinder {
   padding-top: var(--space-grid);
+  padding-bottom: var(--space-grid-half);
   margin: 0 var(--space-grid);
   height: 100%;
   flex: 1 1 70vw;
