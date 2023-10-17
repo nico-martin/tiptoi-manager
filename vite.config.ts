@@ -127,12 +127,8 @@ export default defineConfig({
           name: 'twitter:description',
           content: app.description,
         },
-        {
-          name: 'twitter:image',
-          content: 'en_US',
-        },
         /*{
-          name: 'twitter:type',
+          name: 'twitter:image',
           content: '/twitter.jpg',
         },*/
       ],
